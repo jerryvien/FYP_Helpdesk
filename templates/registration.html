@@ -1,11 +1,12 @@
 {% extends "login_template.html" %}
 {% block content %}
 <div class="container log-row">
-          <form class="form-signin" action="/base/">
+          <form class="form-signin" id="signupForm" method="get" action="/registration.html/">
               <p>Enter your personal details below</p>
-              <input type="text" class="form-control" placeholder="Full Name" autofocus>
-              <input type="text" class="form-control" placeholder="Address" autofocus>
-              <input type="text" class="form-control" placeholder="Email" autofocus>
+
+              <input id="firstname" name="firstname" type="text" class="form-control" placeholder="Full Name" autofocus>
+              <input id="username" name="username" type="text" class="form-control" placeholder="Address" autofocus>
+              <input id="email" name="email" type="text" class="form-control" placeholder="Email" autofocus>
               <input type="text" class="form-control" placeholder="City/Town" autofocus>
               <div class="radio-custom radio-success">
                   <input type="radio" value="yes" checked="checked" name="option-yes" id="male">
@@ -16,8 +17,8 @@
 
               <p> Enter your account details below</p>
               <input type="text" class="form-control" placeholder="User Name" autofocus>
-              <input type="password" class="form-control" placeholder="Password">
-              <input type="password" class="form-control" placeholder="Re-type Password">
+              <input id="password" name="password" type="password" class="form-control" placeholder="Password">
+              <input id="confirm_password" name="confirm_password" type="password" class="form-control" placeholder="Re-type Password">
               <label class="checkbox-custom check-success">
                   <input type="checkbox" value="agree this condition" id="checkbox1"> <label for="checkbox1">I agree to the Terms of Service and Privacy Policy</label>
               </label>

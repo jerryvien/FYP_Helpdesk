@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mongoengine.django.mongo_auth',
+    'HelpdekApp',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -82,6 +84,30 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'mongoengine.django.auth.MongoEngineBackend',
+)
+AUTH_USER_MODEL = 'mongo_auth.MongoUser'
+#MONGOENGINE_USER_DOCUMENT = 'SocialCommerceApp.models.CustomUser'
+MONGOENGINE_USER_DOCUMENT = 'mongoengine.django.auth.User'
+SESSION_ENGINE = 'mongoengine.django.sessions'
+
+import mongoengine
+DBNAME = 'HelpDeskDB'
+
+AUTHENTICATION_BACKENDS = (
+	'mongoengine.django.auth.MongoEngineBackend',
+)
+
+_MONGODB_USER = 'admin'
+_MONGODB_PASSWD = 'admin'
+_MONGODB_HOST = 'localhost'
+_MONGODB_NAME = DBNAME
+_MONGODB_DATABASE_HOST = \
+	'mongodb://%s:%s@%s/%s' \
+	% (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
+#, host=_MONGODB_DATABASE_HOST
+mongoengine.connect(_MONGODB_NAME)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

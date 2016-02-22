@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^registration/', 'HelpdekApp.views.registration', name='Registration'),
     url(r'^test/', 'HelpdekApp.views.test', name='Registration'),
     url(r'^dashboard/', 'HelpdekApp.views.dashboard', name='Dashboard'),
+    url(r'^validation/', 'HelpdekApp.views.dashboard', name='Dashboard'),
+    url(r'^googleMaps/', 'HelpdekApp.views.googleMap', name='googleMaps'),
     url(r'^profile/', 'HelpdekApp.views.profile', name='Profile'),
     url(r'^base/', 'HelpdekApp.views.blank', name='base')
 ]

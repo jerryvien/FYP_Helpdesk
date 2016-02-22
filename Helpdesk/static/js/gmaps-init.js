@@ -4,8 +4,8 @@ var GoogleMaps = function () {
     var mapBasic = function () {
         new GMaps({
             div: '#gmap_basic',
-            lat: -12.043333,
-            lng: -77.028333
+            lat: 3.186905,
+            lng: 101.650800
         });
     }
 
