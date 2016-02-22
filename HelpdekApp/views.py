@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
+
+from django.shortcuts import get_object_or_404
 from mongoengine.django.auth import User
 from messagekey import *
 # use to run http request
@@ -8,7 +10,7 @@ from models import RegisterUser
 # Create your views here.
 main_key = MainMsg
 from bson.objectid import ObjectId
-
+from django.http import Http404
 def index(request):
     form = LoginForm
     post = request.POST
@@ -16,6 +18,7 @@ def index(request):
     # allow change data in request.POST
     user = User.objects.get(id=ObjectId("56cb0301dbaf600e7408158e"))
     #a = RegisterUser.objects.get(userName = 'abc')
+    raise Http404("index.html")
     #User.create_user(username="Test", password='12345')
     if request.method == main_key.POST:
         form = LoginForm(post)
