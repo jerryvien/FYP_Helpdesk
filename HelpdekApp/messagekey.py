@@ -37,5 +37,6 @@ class MainMsg(Document):
     CURSORTOEND = 'this.value = this.value'
     STYLE = 'style'
     FORM_CONTROL_CLASS = 'form-control'
+    FORM_CONTROL_CLASS_BUTTON ='radio-custom'
     BORDER_RED = 'border-color:red;'
     UNKNOWN_ERROR = 'Unknown error'

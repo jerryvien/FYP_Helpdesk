@@ -1,7 +1,7 @@
 {% extends "login_template.html" %}
 {% block content %}
 <div class="container log-row">
-          <form class="form-signin" action="/dashboard/">
+          <form class="form-signin" action="/login/" method="post">{% csrf_token %}
               <div class="login-wrap">
                   <input type="text" class="form-control" placeholder="User ID" autofocus>
                   <input type="password" class="form-control" placeholder="Password">

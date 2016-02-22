@@ -18,15 +18,16 @@ TITLE_CHOICES = (
 
 class RegisterUser(Document):
     userName = StringField(max_length=10, required=True)
-    #eMail = EmailField(required=True)
-    #password = StringField(min_length=6, max_length=12,required=True)
-    #confirmPassword = StringField(min_length=6, max_length=12,required=True)
-
-
-class Admin(Document):
-    userName = StringField(max_length=10, required=True)
-    eMail = EmailField(required=True)
+    display_name = StringField(max_length=10, required=True)
+    email = EmailField(required=True)
     password = StringField(min_length=6, max_length=12,required=True)
-    confirmPassword = StringField(min_length=6, max_length=12,required=True)
-    ticket = ListField(ReferenceField(RegisterUser))
+    confirm_password = StringField(min_length=6, max_length=12,required=True)
+
+
+#class Admin(Document):
+ #   userName = StringField(max_length=10, required=True)
+  #  eMail = EmailField(required=True)
+   # password = StringField(min_length=6, max_length=12,required=True)
+    #confirmPassword = StringField(min_length=6, max_length=12,required=True)
+    #ticket = ListField(ReferenceField(RegisterUser))
 

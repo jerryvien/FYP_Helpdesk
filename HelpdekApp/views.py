@@ -11,6 +11,7 @@ from models import RegisterUser
 main_key = MainMsg
 from bson.objectid import ObjectId
 from django.http import Http404
+
 def index(request):
     form = LoginForm
     post = request.POST
@@ -38,6 +39,17 @@ def index(request):
 
 def login_view(request):
     title = main_key.LOGIN_TITLE
+    form = LoginForm
+    post = request.POST
+    post._mutable = True
+
+    if request.method == main_key.POST:
+        form = LoginForm(post)
+        account = form.data['account']
+        password = form.data['password']
+
+    else:
+        form = LoginForm()
 
     context = {
         main_key.TEMPLATE_TITLE: title,
@@ -55,12 +67,26 @@ def login_template(request):
     return render(request, 'login_template.html', context)
 
 def registration(request):
+    form = RegisterForm
+    post = request.POST
+    post._mutable = True
+
+    if request.method == main_key.POST:
+        form = RegisterForm(post)
+        username = form.data['username']
+        display_name = form.data['display_name']
+        email = form.data['email']
+        password = form.data['password']
+        gender = form.data['gender']
+        return HttpResponseRedirect(main_key.TO_LOGIN_PAGE)
+    else:
+        form = RegisterForm() # An unbound form
 
     title = main_key.REGISTER_TITLE
 
     context = {
         main_key.TEMPLATE_TITLE: title,
-
+        'forms': form,
     }
     return render(request, 'registration.html', context)
 
