@@ -280,7 +280,7 @@
             </div>{% endcomment %}
 
 
-    <div class="wrapper">
+   {% comment %} <div class="wrapper">
 
                 <div class="row">
                     <div class="col-lg-6">
@@ -377,7 +377,33 @@
                     </div>
                 </div>
 
-            </div>
+            </div>{% endcomment %}
+
+
+     <form class="form-signin" id="signupForm" method="post" action="/registration/">{% csrf_token %}
+              <p>Enter your personal details below</p>
+
+              <input id="firstname" name="firstname" type="text" class="form-control" placeholder="Full Name" autofocus>
+              <input id="username" name="username" type="text" class="form-control" placeholder="Address" autofocus>
+              <input id="email" name="email" type="text" class="form-control" placeholder="Email" autofocus>
+              <input type="text" class="form-control" placeholder="City/Town" autofocus>
+              <div class="radio-custom radio-success">
+                  <input type="radio" value="yes" checked="checked" name="option-yes" id="male">
+                  <label for="male">Male</label>
+                  <input type="radio"  value="no" name="option-yes" id="female">
+                  <label for="female">Female</label>
+              </div>
+
+              <p> Enter your account details below</p>
+              <input type="text" class="form-control" placeholder="User Name" autofocus>
+              <input id="password" name="password" type="password" class="form-control" placeholder="Password">
+              <input id="confirm_password" name="confirm_password" type="password" class="form-control" placeholder="Re-type Password">
+              <label class="checkbox-custom check-success">
+                  <input type="checkbox" value="agree this condition" id="checkbox1"> <label for="checkbox1">I agree to the Terms of Service and Privacy Policy</label>
+              </label>
+
+
+
     <!--Sparkline Chart-->
 <script src="{% static "js/sparkline/jquery.sparkline.js"%}"></script>
 <script src="{% static "js/sparkline/sparkline-init.js"%}"></script>

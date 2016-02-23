@@ -13,6 +13,7 @@ class LoginForm(forms.Form):
                                                            main_key.PLACEHOLDER: 'Username',
                                                            main_key.AUTOFOCUS: True,
                                                            main_key.ONFOCUS : main_key.CURSORTOEND}))
+
     password = forms.CharField(widget=forms.PasswordInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
                                                                main_key.PLACEHOLDER: 'Password'}))
     def clean(self):
@@ -31,22 +32,28 @@ class RegisterForm(forms.Form):
                                                            main_key.AUTOFOCUS: True,
                                                            main_key.ONFOCUS : main_key.CURSORTOEND}))
 
-    gender = forms.ChoiceField(widget=forms.RadioSelect(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS_BUTTON}), choices=(('M', 'Male'),('F', 'Female'),), initial=(('M', 'Male'),('F', 'Female')[0][0]))
+    #gender = forms.ChoiceField(widget=forms.RadioSelect(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS_BUTTON}), choices=(('M', 'Male'),('F', 'Female'),), initial=(('M', 'Male'),('F', 'Female')[0][0]))
 
     email = forms.EmailField(widget=forms.TextInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
                                                            main_key.PLACEHOLDER: 'E-Mail',
                                                            main_key.AUTOFOCUS: True,
                                                            main_key.ONFOCUS : main_key.CURSORTOEND}))
 
-    password = forms.CharField(widget=forms.PasswordInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
+    address = forms.CharField(widget=forms.TextInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
+                                                           main_key.PLACEHOLDER: 'Address',
+                                                           main_key.AUTOFOCUS: True,
+                                                           main_key.ONFOCUS: main_key.CURSORTOEND}))
+
+    password = forms.CharField(widget=forms.PasswordInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,'id': 'password',
                                                                main_key.PLACEHOLDER:'Password'}))
 
-    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,'id': 'confirm_password',
                                                                main_key.PLACEHOLDER:'Re-type Password'}))
 
     def clean(self):
         cleaned_data = super(RegisterForm, self).clean()
         username = cleaned_data.get('username')
+        address = cleaned_data.get('address')
         email = cleaned_data.get('email')
         password = cleaned_data.get('password')
         confirm_password = cleaned_data.get('confirm_password')

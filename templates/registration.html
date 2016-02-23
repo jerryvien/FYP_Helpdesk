@@ -26,8 +26,8 @@
           {% for field in forms %}
         <div class="fieldWrapper">
         {{ field }} {% for error in field.errors %}<error>{{ error|escape }}</error> {% endfor %}
-    </div>
-{% endfor %}
+        </div>
+            {% endfor %}
 
 
 

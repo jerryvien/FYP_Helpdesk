@@ -3,8 +3,15 @@
 <div class="container log-row">
           <form class="form-signin" action="/login/" method="post">{% csrf_token %}
               <div class="login-wrap">
-                  <input type="text" class="form-control" placeholder="User ID" autofocus>
-                  <input type="password" class="form-control" placeholder="Password">
+                  {% comment %}<input type="text" class="form-control" placeholder="User ID" autofocus>
+                  <input type="password" class="form-control" placeholder="Password">{% endcomment %}
+
+                  {% for field in forms %}
+                    <div class="fieldWrapper">
+                    {{ field }} {% for error in field.errors %}<error>{{ error|escape }}</error> {% endfor %}
+                    </div>
+                  {% endfor %}
+
                   <button class="btn btn-lg btn-success btn-block" type="submit">LOGIN</button>
                   <div class="login-social-link">
                       <a href="homePage.html" class="facebook">

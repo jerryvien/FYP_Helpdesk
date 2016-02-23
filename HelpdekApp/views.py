@@ -21,6 +21,7 @@ def index(request):
     #a = RegisterUser.objects.get(userName = 'abc')
     raise Http404("index.html")
     #User.create_user(username="Test", password='12345')
+
     if request.method == main_key.POST:
         form = LoginForm(post)
         account =  form.data['account']
@@ -42,18 +43,29 @@ def login_view(request):
     form = LoginForm
     post = request.POST
     post._mutable = True
-
+    session = request.session
+    user = False
     if request.method == main_key.POST:
         form = LoginForm(post)
         account = form.data['account']
         password = form.data['password']
 
+        try:
+            user = CustomUser.objects.get(username=account)
+        except DoesNotExist:
+            pass
+        except Exception, e:
+            pass
+
+        if user != False:
+            session['login_user'] = user.username
+            return HttpResponseRedirect(main_key.TO_HOME_PAGE)
     else:
         form = LoginForm()
 
     context = {
         main_key.TEMPLATE_TITLE: title,
-
+        'forms': form,
     }
     return render(request, 'login.html', context)
 
@@ -67,6 +79,7 @@ def login_template(request):
     return render(request, 'login_template.html', context)
 
 def registration(request):
+
     form = RegisterForm
     post = request.POST
     post._mutable = True
@@ -74,10 +87,16 @@ def registration(request):
     if request.method == main_key.POST:
         form = RegisterForm(post)
         username = form.data['username']
-        display_name = form.data['display_name']
+        #display_name = form.data['display_name']
         email = form.data['email']
         password = form.data['password']
-        gender = form.data['gender']
+        address = form.data['address']
+        #gender = form.data['gender']
+        #User.create_user(username=username,password=password,email=email)
+        user = CustomUser.create_user(username=username,password=password,email=email)
+        user.address = address
+        user.save()
+
         return HttpResponseRedirect(main_key.TO_LOGIN_PAGE)
     else:
         form = RegisterForm() # An unbound form
@@ -119,12 +138,13 @@ def test(request):
     return render(request, 'test.html', context)
 
 def dashboard(request):
-
+    session = request.session
+    user = CustomUser.objects.get(username=session['login_user'])
     title = main_key.DASHBOARD_TITLE
 
     context = {
         main_key.TEMPLATE_TITLE: title,
-
+        'user': user
     }
     return render(request, 'dashboard.html', context)
 

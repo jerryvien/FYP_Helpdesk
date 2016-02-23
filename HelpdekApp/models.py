@@ -23,6 +23,8 @@ class RegisterUser(Document):
     password = StringField(min_length=6, max_length=12,required=True)
     confirm_password = StringField(min_length=6, max_length=12,required=True)
 
+class CustomUser(User):
+    address = StringField()
 
 #class Admin(Document):
  #   userName = StringField(max_length=10, required=True)

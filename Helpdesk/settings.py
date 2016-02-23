@@ -88,7 +88,7 @@ AUTHENTICATION_BACKENDS = (
     'mongoengine.django.auth.MongoEngineBackend',
 )
 AUTH_USER_MODEL = 'mongo_auth.MongoUser'
-#MONGOENGINE_USER_DOCUMENT = 'SocialCommerceApp.models.CustomUser'
+MONGOENGINE_USER_DOCUMENT = 'HelpdekApp.models.CustomUser'
 MONGOENGINE_USER_DOCUMENT = 'mongoengine.django.auth.User'
 SESSION_ENGINE = 'mongoengine.django.sessions'
 
