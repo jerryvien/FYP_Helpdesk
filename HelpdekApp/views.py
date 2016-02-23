@@ -5,8 +5,11 @@ from django.shortcuts import get_object_or_404
 from mongoengine.django.auth import User
 from messagekey import *
 # use to run http request
+from django.contrib.auth import logout
 from forms import *
-from models import RegisterUser
+from functions import *
+from models import *
+from messagekey import *
 # Create your views here.
 main_key = MainMsg
 from bson.objectid import ObjectId
@@ -38,6 +41,34 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+def logout_view(request):
+    session = request.session
+
+    logout(request)
+    return HttpResponseRedirect(main_key.TO_HOME_PAGE)
+
+def forget_password(request):
+    form = ResetPasswordForm
+    post = request.POST
+    post._mutable = True
+    if request.method == main_key.POST:
+        form = ResetPasswordForm(post)
+        if form.is_valid():
+            username = form.data['username']
+            user = GetUser(username)
+            if user != False:
+                #new_password = GenerateRandomPassword(user)
+                user.set_password('Password123')
+                user.save()
+                return HttpResponseRedirect(main_key.TO_LOGIN_PAGE) # Redirect after POST
+    else:
+        form = ResetPasswordForm()
+
+    context ={
+         'forms': form,
+     }
+    return render(request, 'resetPassword.html', context)
+
 def login_view(request):
     title = main_key.LOGIN_TITLE
     form = LoginForm
@@ -47,19 +78,15 @@ def login_view(request):
     user = False
     if request.method == main_key.POST:
         form = LoginForm(post)
-        account = form.data['account']
-        password = form.data['password']
-
-        try:
-            user = CustomUser.objects.get(username=account)
-        except DoesNotExist:
-            pass
-        except Exception, e:
-            pass
-
-        if user != False:
-            session['login_user'] = user.username
-            return HttpResponseRedirect(main_key.TO_HOME_PAGE)
+        if form.is_valid():
+            account = form.data['account']
+            password = form.data['password']
+            user = GetUser(account)
+            if user != False:
+                session['login_user'] = user.username
+                user.last_login = datetime.datetime.now();
+                user.save()
+                return HttpResponseRedirect(main_key.TO_HOME_PAGE)
     else:
         form = LoginForm()
 
@@ -86,16 +113,18 @@ def registration(request):
 
     if request.method == main_key.POST:
         form = RegisterForm(post)
-        username = form.data['username']
-        #display_name = form.data['display_name']
-        email = form.data['email']
-        password = form.data['password']
-        address = form.data['address']
-        #gender = form.data['gender']
-        #User.create_user(username=username,password=password,email=email)
-        user = CustomUser.create_user(username=username,password=password,email=email)
-        user.address = address
-        user.save()
+        if form.is_valid():
+            username = form.data['username']
+            display_name = form.data['display_name']
+            email = form.data['email']
+            password = form.data['password']
+            address = form.data['address']
+            #gender = form.data['gender']
+            #User.create_user(username=username,password=password,email=email)
+            user = CreateUser(username,password,email,display_name,address)
+            #user = CustomUser.create_user(username=username,password=password,email=email)
+            #user.address = address
+            #user.save()
 
         return HttpResponseRedirect(main_key.TO_LOGIN_PAGE)
     else:
@@ -140,6 +169,10 @@ def test(request):
 def dashboard(request):
     session = request.session
     user = CustomUser.objects.get(username=session['login_user'])
+
+    #if CheckIsLoggedIn(session) == True:
+        #return HttpResponseRedirect(main_key.TO_LOGIN_PAGE) # Redirect after POST
+
     title = main_key.DASHBOARD_TITLE
 
     context = {

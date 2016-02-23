@@ -15,16 +15,38 @@ TITLE_CHOICES = (
     ('MRS', 'Mrs.'),
     ('MS', 'Ms.'),
 )
+STATUS_CHOICES = (
+    ('OPEN','Open'),
+    ('CLOSE','Close'),
+)
 
 class RegisterUser(Document):
     userName = StringField(max_length=10, required=True)
-    display_name = StringField(max_length=10, required=True)
     email = EmailField(required=True)
     password = StringField(min_length=6, max_length=12,required=True)
     confirm_password = StringField(min_length=6, max_length=12,required=True)
 
 class CustomUser(User):
     address = StringField()
+    display_name = StringField(max_length=10)
+    #ticket = EmbeddedDocumentField(RequestDetails)
+    #status = StringField(choices= STATUS_CHOICES)
+
+class RequestDetails(EmbeddedDocument):
+    status = StringField(choices= STATUS_CHOICES)
+    category = StringField(choices= STATUS_CHOICES)
+    subcategory = StringField(choices= STATUS_CHOICES)
+    created_by = StringField(choices= STATUS_CHOICES)
+    department = StringField(choices= STATUS_CHOICES)
+    due_by = DateTimeField()
+    last_update_time = DateTimeField()
+    created_time = DateTimeField()
+    technician = StringField(choices= STATUS_CHOICES)
+    piriority = StringField(choices= STATUS_CHOICES)
+
+
+
+
 
 #class Admin(Document):
  #   userName = StringField(max_length=10, required=True)

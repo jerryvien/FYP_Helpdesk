@@ -5,12 +5,13 @@
               <div class="login-wrap">
                   {% comment %}<input type="text" class="form-control" placeholder="User ID" autofocus>
                   <input type="password" class="form-control" placeholder="Password">{% endcomment %}
-
+              {% if field.name != 'password' %}
                   {% for field in forms %}
-                    <div class="fieldWrapper">
-                    {{ field }} {% for error in field.errors %}<error>{{ error|escape }}</error> {% endfor %}
-                    </div>
+                        <div class="fieldWrapper">
+                            {{ field }} {% for error in field.errors %}<error>{{ error|escape }}</error> {% endfor %}
+                        </div>
                   {% endfor %}
+              {% endif %}
 
                   <button class="btn btn-lg btn-success btn-block" type="submit">LOGIN</button>
                   <div class="login-social-link">
@@ -45,7 +46,14 @@
                           </div>
                           <div class="modal-body">
                               <p>Enter your e-mail address below to reset your password.</p>
-                              <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                              {% comment %}<input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">{% endcomment %}
+                              {% if field.name != 'password' %}
+                              {% for field in forms %}
+                                    {{ field }} {% for error in field.errors %}<error>{{ error|escape }}</error> {% endfor %}
+                                {% endfor %}
+                                {% endif %}
+
+                          {% comment %}{% include 'resetPassword.html' %}{% endcomment %}
 
                           </div>
                           <div class="modal-footer">

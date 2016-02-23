@@ -19,7 +19,15 @@ var Script = function () {
                 lastname: "required",
                 username: {
                     required: true,
-                    minlength: 2
+                    minlength: 5
+                },
+                display_name: {
+                    required: true,
+                    minlength: 5
+                },
+                address: {
+                    required: true,
+                    minlength: 5
                 },
                 password: {
                     required: true,
@@ -45,7 +53,15 @@ var Script = function () {
                 lastname: "Please enter your lastname",
                 username: {
                     required: "Please enter a username",
-                    minlength: "Your username must consist of at least 2 characters"
+                    minlength: "Your username must consist of at least 5 characters"
+                },
+                display_name: {
+                    required: "Please enter a nickname",
+                    minlength: "Your nickname must consist of at least 5 characters"
+                },
+                address: {
+                    required: "Please enter a address",
+                    minlength: "Your address must consist of at least 5 characters"
                 },
                 password: {
                     required: "Please provide a password",
