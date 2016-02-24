@@ -21,6 +21,8 @@ def CreateUser(username, password, email, display_name, address):
     user.last_login = datetime.datetime.now()
     user.date_joined = datetime.datetime.now()
     user.address = address
+    user.is_superuser = False
+    user.is_staff = True
     user.save()
     return user
 
@@ -28,6 +30,18 @@ def GetUser(input_name):
     try:
         user = CustomUser.objects.get(username=input_name)
         return user
+    except DoesNotExist:
+            return False
+    except Exception, e:
+            return False
+
+def GetAdmin(input_name):
+    try:
+        user = CustomUser.objects.get(username=input_name)
+        if user.is_superuser == True:
+            return True
+        else:
+            return False
     except DoesNotExist:
             return False
     except Exception, e:

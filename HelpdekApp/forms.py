@@ -40,7 +40,6 @@ class LoginForm(forms.Form):
         return ret
 
 
-
 class RegisterForm(forms.Form):
     username = forms.CharField(max_length=10, min_length=5,widget=forms.TextInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
                                                            main_key.PLACEHOLDER: 'Username',
@@ -70,7 +69,7 @@ class RegisterForm(forms.Form):
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,'id': 'confirm_password',
                                                                main_key.PLACEHOLDER:'Re-type Password'}))
 
-    status = forms.ChoiceField(choices= STATUS_CHOICES, label="",initial="",widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
+    #status = forms.ChoiceField(choices= STATUS_CHOICES, label="",initial="",widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
 
     def clean(self):
         cleaned_data = super(RegisterForm, self).clean()
@@ -83,12 +82,12 @@ class RegisterForm(forms.Form):
 
 
 class ResetPasswordForm(forms.Form):
-    account = forms.CharField(error_messages={main_key.REQUIRED: 'Username and password is required'},widget=forms.TextInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
+    account = forms.CharField(error_messages={main_key.REQUIRED: 'Username is required'},widget=forms.TextInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
                                                            main_key.PLACEHOLDER: 'Username',
                                                            main_key.AUTOFOCUS: True,
                                                            main_key.ONFOCUS : main_key.CURSORTOEND}))
     def clean(self):
-        cleaned_data = super(LoginForm, self).clean()
+        cleaned_data = super(ResetPasswordForm, self).clean()
         account = cleaned_data.get('account')
 
     def clean_account(self):

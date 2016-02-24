@@ -43,19 +43,19 @@ def index(request):
 
 def logout_view(request):
     session = request.session
-
     logout(request)
-    return HttpResponseRedirect(main_key.TO_HOME_PAGE)
+    return HttpResponseRedirect(main_key.TO_LOGIN_PAGE)
 
 def forget_password(request):
+    title = main_key.RESET_PASSWORD_PAGE_TITLE
     form = ResetPasswordForm
     post = request.POST
     post._mutable = True
     if request.method == main_key.POST:
         form = ResetPasswordForm(post)
         if form.is_valid():
-            username = form.data['username']
-            user = GetUser(username)
+            account = form.data['account']
+            user = GetUser(account)
             if user != False:
                 #new_password = GenerateRandomPassword(user)
                 user.set_password('Password123')
@@ -65,13 +65,15 @@ def forget_password(request):
         form = ResetPasswordForm()
 
     context ={
-         'forms': form,
+        main_key.TEMPLATE_TITLE: title,
+         'r_form': form,
      }
     return render(request, 'resetPassword.html', context)
 
 def login_view(request):
     title = main_key.LOGIN_TITLE
     form = LoginForm
+    r_form = ResetPasswordForm
     post = request.POST
     post._mutable = True
     session = request.session
@@ -168,10 +170,12 @@ def test(request):
 
 def dashboard(request):
     session = request.session
-    user = CustomUser.objects.get(username=session['login_user'])
 
-    #if CheckIsLoggedIn(session) == True:
-        #return HttpResponseRedirect(main_key.TO_LOGIN_PAGE) # Redirect after POST
+    if CheckIsLoggedIn(session) == False:
+        return HttpResponseRedirect(main_key.TO_ERROR_PAGE) # Redirect after POST
+        pass
+    else:
+        user = CustomUser.objects.get(username=session['login_user'])
 
     title = main_key.DASHBOARD_TITLE
 
@@ -180,6 +184,29 @@ def dashboard(request):
         'user': user
     }
     return render(request, 'dashboard.html', context)
+
+def create_ticket(request):
+    session = request.session
+    site =''
+    if CheckIsLoggedIn(session) == False:
+        return HttpResponseRedirect(main_key.TO_ERROR_PAGE) # Redirect after POST
+    else:
+        user = CustomUser.objects.get(username=session['login_user'])
+
+    admin = GetAdmin(session['login_user'])
+
+    if admin is False:
+        site = 'create_ticket.html'
+    else:
+        site = 'create_ticket_admin.html'
+
+    title = main_key.CREATE_TICKET_TITLE
+
+    context = {
+        main_key.TEMPLATE_TITLE: title,
+        'user': user
+    }
+    return render(request, site, context)
 
 def profile(request):
 

@@ -24,7 +24,7 @@
                   </div>
                   <label class="checkbox-custom check-success">
                       <input type="checkbox" value="remember-me" id="checkbox1"> <label for="checkbox1">Remember me</label>
-                      <a class="pull-right" data-toggle="modal" href="#forgotPass"> Forgot Password?</a>
+                      <a class="pull-right" data-toggle="modal" href="/resetPassword/"> Forgot Password?</a>
                   </label>
 
                   <div class="registration">
@@ -45,14 +45,8 @@
                               <h4 class="modal-title">Forgot Password ?</h4>
                           </div>
                           <div class="modal-body">
-                              <p>Enter your e-mail address below to reset your password.</p>
+                              <p>Enter your username below to reset your password.</p>
                               {% comment %}<input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">{% endcomment %}
-                              {% if field.name != 'password' %}
-                              {% for field in forms %}
-                                    {{ field }} {% for error in field.errors %}<error>{{ error|escape }}</error> {% endfor %}
-                                {% endfor %}
-                                {% endif %}
-
                           {% comment %}{% include 'resetPassword.html' %}{% endcomment %}
 
                           </div>
