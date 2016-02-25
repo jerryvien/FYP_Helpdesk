@@ -8,7 +8,6 @@
     <meta name="keyword" content="slick, flat, dashboard, bootstrap, admin, template, theme, responsive, fluid, retina">
 
     {% load static from staticfiles %}
-    {% load humanize %}
 
     <link rel="shortcut icon" href="{% static "images/ico/favicon.png"%}">
 
@@ -63,30 +62,11 @@
                             <li><a href="calendar.html"> Search Ticket</a></li>
                         </ul>
                     </li>
-                        <h3 class="navigation-title">Management</h3>
-                    </li>
-                    <li class="menu-list"><a href=""><i class="fa fa-users"></i> <span>Users <span class="badge noti-arrow bg-success pull-right"></span> </span></a>
-                        <ul class="child-list">
-                            <li><a href="grid.html"> Users Directory</a></li>
-                            <li><a href="calendar.html"> Organizations</a></li>
-                        </ul>
-                    </li>
-
-
                     <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>Tasks</span></a>
                         <ul class="child-list">
                             <li><a href="form-layout.html"> Tasks</a></li>
                         </ul>
                     </li>
-
-                    <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>Reports</span></a>
-                        <ul class="child-list">
-                            <li><a href="flot-chart.html"> Incident Reports</a></li>
-                            <li><a href="morris-chart.html"> Request Reports</a></li>
-                            <li><a href="chartjs.html"> Agent Reports</a></li>
-                        </ul>
-                    </li>
-                    <li>
                         <h3 class="navigation-title">Extra</h3>
                     </li>
 
@@ -109,7 +89,7 @@
                 <!--sidebar nav end-->
 
                 <!--sidebar widget start-->
-                <div class="sidebar-widget">
+                {% comment %}<div class="sidebar-widget">
                     <h4>Server Status</h4>
                     <ul class="list-group">
                         <li>
@@ -132,7 +112,7 @@
                         </li>
                         <li><a href="javascript:;" class="btn btn-success btn-sm ">View Details</a></li>
                     </ul>
-                </div>
+                </div>{% endcomment %}
                 <!--sidebar widget end-->
 
             </div>
@@ -595,7 +575,7 @@
                                         Help
                                     </a>
                                 </li>
-                                <li><a href="/logout/"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                <li><a href="/login/"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                             </ul>
                         </li>
 {% comment %}                        <li>

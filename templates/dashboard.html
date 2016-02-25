@@ -1,5 +1,30 @@
 {% extends "main_template.html" %}
-
+{% load humanize %}
 {% block content %}
+
+    <div class="container">
+  <h2>Basic Table</h2>
+  <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Action</th>
+        <th>Date_Time</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in log %}
+      <tr>
+        <td>{{ item.user.username }}</td>
+        <td>{{ item.content }}<span>, </span>{{ item.created_date_time|naturaltime}}</td>
+        <td>{{ 1000000|intword}}</td>
+      </tr>
+
+    {% endfor%}
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}

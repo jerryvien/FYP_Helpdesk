@@ -26,23 +26,23 @@ class RegisterUser(Document):
     password = StringField(min_length=6, max_length=12,required=True)
     confirm_password = StringField(min_length=6, max_length=12,required=True)
 
+class RequestDetails(EmbeddedDocument):
+    user = ReferenceField('CustomUser')
+    status = StringField(max_length=120)
+    created_date_time = DateTimeField()
+
+class SystemLog(Document):
+    user = ReferenceField('CustomUser')
+    content = StringField()
+    created_date_time = DateTimeField(default=datetime.datetime.now())
+
 class CustomUser(User):
     address = StringField()
     display_name = StringField(max_length=10)
     #ticket = EmbeddedDocumentField(RequestDetails)
+    ticket = ListField(EmbeddedDocumentField(RequestDetails))
     #status = StringField(choices= STATUS_CHOICES)
 
-class RequestDetails(EmbeddedDocument):
-    status = StringField(choices= STATUS_CHOICES)
-    category = StringField(choices= STATUS_CHOICES)
-    subcategory = StringField(choices= STATUS_CHOICES)
-    created_by = StringField(choices= STATUS_CHOICES)
-    department = StringField(choices= STATUS_CHOICES)
-    due_by = DateTimeField()
-    last_update_time = DateTimeField()
-    created_time = DateTimeField()
-    technician = StringField(choices= STATUS_CHOICES)
-    piriority = StringField(choices= STATUS_CHOICES)
 
 
 

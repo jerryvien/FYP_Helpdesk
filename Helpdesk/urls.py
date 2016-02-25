@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^login/', 'HelpdekApp.views.login_view', name='Login'),
     url(r'^logout/', 'HelpdekApp.views.logout_view', name='Logout'),
     url(r'^create_ticket/', 'HelpdekApp.views.create_ticket', name='Create_Ticket'),
+    url(r'^create_ticket_admin/', 'HelpdekApp.views.create_ticket', name='Create_Ticket_Admin'),
     url(r'^error/', 'HelpdekApp.views.error', name='error'),
     url(r'^registration/', 'HelpdekApp.views.registration', name='Registration'),
     url(r'^test/', 'HelpdekApp.views.test', name='Registration'),

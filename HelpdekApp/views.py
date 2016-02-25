@@ -1,20 +1,21 @@
-from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseRedirect
-
-from django.shortcuts import get_object_or_404
-from mongoengine.django.auth import User
-from messagekey import *
-# use to run http request
+from django.shortcuts import render_to_response, render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template import RequestContext
+from django.template import Context, loader
+from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import logout
 from forms import *
 from functions import *
 from models import *
 from messagekey import *
-# Create your views here.
-main_key = MainMsg
-from bson.objectid import ObjectId
+from bson import ObjectId
+import json
+import operator
 from django.http import Http404
-
+import datetime
+import time
 def index(request):
     form = LoginForm
     post = request.POST
@@ -88,7 +89,13 @@ def login_view(request):
                 session['login_user'] = user.username
                 user.last_login = datetime.datetime.now();
                 user.save()
-                return HttpResponseRedirect(main_key.TO_HOME_PAGE)
+
+            log = SystemLog()
+            log.user = user.to_dbref()
+            log.content = user.username+' has log In successfully'
+            log.created_date_time = datetime.datetime.now()
+            log.save()
+            return HttpResponseRedirect(main_key.TO_HOME_PAGE)
     else:
         form = LoginForm()
 
@@ -177,11 +184,15 @@ def dashboard(request):
     else:
         user = CustomUser.objects.get(username=session['login_user'])
 
+
+    log = SystemLog.objects.all()
+
     title = main_key.DASHBOARD_TITLE
 
     context = {
         main_key.TEMPLATE_TITLE: title,
-        'user': user
+        'user': user,
+        'log':log
     }
     return render(request, 'dashboard.html', context)
 
@@ -194,16 +205,33 @@ def create_ticket(request):
         user = CustomUser.objects.get(username=session['login_user'])
 
     admin = GetAdmin(session['login_user'])
-
+    requestor = GetUser(session['login_user'])
     if admin is False:
-        site = 'create_ticket.html'
-    else:
         site = 'create_ticket_admin.html'
+    else:
+        site = 'create_ticket.html'
 
     title = main_key.CREATE_TICKET_TITLE
 
+    form = Create_Ticket_Form
+    post = request.POST
+    post._mutable = True
+
+    if request.method == main_key.POST:
+        form = Create_Ticket_Form(post)
+        if form.is_valid():
+            ticket = RequestDetails()
+            ticket.status = form.data['status']
+            ticket.created_date_time = datetime.datetime.now()
+            ticket.user = user.to_dbref()
+            user.ticket.append(ticket)
+            user.save()
+    else:
+        form = Create_Ticket_Form()
+
     context = {
         main_key.TEMPLATE_TITLE: title,
+        'forms': form,
         'user': user
     }
     return render(request, site, context)

@@ -6,6 +6,7 @@ from models import *
 from functions import *
 from messagekey import *
 from mongoengine.queryset import DoesNotExist
+from djangotoolbox.fields import *
 
 main_key = MainMsg
 
@@ -99,6 +100,22 @@ class ResetPasswordForm(forms.Form):
         user = GetUser(data[input])
         if user is False:
             errors(input, 'Invalid Username.')
+
+class Create_Ticket_Form(forms.Form):
+    status = forms.CharField(widget=forms.Textarea(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
+                                                           main_key.PLACEHOLDER: 'Description',
+                                                           main_key.AUTOFOCUS: True,
+                                                           main_key.ONFOCUS : main_key.CURSORTOEND}))
+    def clean(self):
+         cleaned_data = super(Create_Ticket_Form, self).clean()
+         status = cleaned_data.get('status')
+
+    def clean_status(self):
+            data = self.data
+            fields = self.fields
+            errors = self.add_error
+            input = 'status'
+
 
 
 
