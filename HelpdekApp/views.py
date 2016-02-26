@@ -81,21 +81,31 @@ def login_view(request):
     user = False
     if request.method == main_key.POST:
         form = LoginForm(post)
-        if form.is_valid():
-            account = form.data['account']
-            password = form.data['password']
-            user = GetUser(account)
-            if user != False:
-                session['login_user'] = user.username
-                user.last_login = datetime.datetime.now();
-                user.save()
 
-            log = SystemLog()
+        account = form.data['account']
+        password = form.data['password']
+        log = SystemLog()
+        user = GetUser(account)
+        if user != False:
+            session['login_user'] = user.username
+            user.last_login = datetime.datetime.now();
+            user.save()
+            log.content = user.username+' failed to login'
             log.user = user.to_dbref()
-            log.content = user.username+' has log In successfully'
+            log.role = 'error'
             log.created_date_time = datetime.datetime.now()
             log.save()
             return HttpResponseRedirect(main_key.TO_HOME_PAGE)
+        if user is False:
+            session['login_user'] = user.username
+            user.last_login = datetime.datetime.now();
+            user.save()
+            log.content = user.username+' has log In successfully'
+            log.user = user.to_dbref()
+            log.role = 'Admin'
+            log.created_date_time = datetime.datetime.now()
+            log.save()
+        return HttpResponseRedirect(main_key.TO_HOME_PAGE)
     else:
         form = LoginForm()
 
@@ -196,6 +206,50 @@ def dashboard(request):
     }
     return render(request, 'dashboard.html', context)
 
+def user_directory(request):
+
+    session = request.session
+    if CheckIsLoggedIn(session) == False:
+        return HttpResponseRedirect(main_key.TO_ERROR_PAGE) # Redirect after POST
+        pass
+    else:
+        user = CustomUser.objects.get(username=session['login_user'])
+
+
+    log = SystemLog.objects.all()
+    userR = CustomUser.objects.all()
+
+    title = 'User Directory'
+
+    context = {
+        main_key.TEMPLATE_TITLE: title,
+        'user': user,
+        'userR': userR,
+        'log':log
+    }
+    return render(request, 'user_directory.html', context)
+
+def ticket_directory(request):
+
+    session = request.session
+    if CheckIsLoggedIn(session) == False:
+        return HttpResponseRedirect(main_key.TO_ERROR_PAGE) # Redirect after POST
+        pass
+    else:
+        user = CustomUser.objects.get(username=session['login_user'])
+
+
+    log = SystemLog.objects.all()
+    userR = CustomUser.objects.all()
+    title = 'Ticket Directory'
+    context = {
+        main_key.TEMPLATE_TITLE: title,
+        'user': user,
+        'userR': userR,
+        'log':log
+    }
+    return render(request, 'ticket_directory.html', context)
+
 def create_ticket(request):
     session = request.session
     site =''
@@ -207,9 +261,9 @@ def create_ticket(request):
     admin = GetAdmin(session['login_user'])
     requestor = GetUser(session['login_user'])
     if admin is False:
-        site = 'create_ticket_admin.html'
-    else:
         site = 'create_ticket.html'
+    else:
+        site = 'create_ticket_admin.html'
 
     title = main_key.CREATE_TICKET_TITLE
 
@@ -217,15 +271,27 @@ def create_ticket(request):
     post = request.POST
     post._mutable = True
 
+
     if request.method == main_key.POST:
         form = Create_Ticket_Form(post)
         if form.is_valid():
             ticket = RequestDetails()
-            ticket.status = form.data['status']
             ticket.created_date_time = datetime.datetime.now()
+            ticket.ticket_number = 'T001'
+            ticket.contact_number = form.data['contact']
+            ticket.email = form.data['email']
+            ticket.subject = form.data['subject']
+            ticket.description = form.data['description']
+            ticket.request_type = form.data['request_type']
+            ticket.impact = form.data['impact']
+            ticket.urgency = form.data['urgency']
+            ticket.status = form.data['status']
+            ticket.mode = form.data['mode']
+            ticket.team = form.data['team']
             ticket.user = user.to_dbref()
             user.ticket.append(ticket)
             user.save()
+            return HttpResponseRedirect(main_key.TO_HOME_PAGE)
     else:
         form = Create_Ticket_Form()
 
@@ -234,7 +300,7 @@ def create_ticket(request):
         'forms': form,
         'user': user
     }
-    return render(request, site, context)
+    return render(request, 'create_ticket_admin.html', context)
 
 def profile(request):
 

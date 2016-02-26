@@ -15,12 +15,12 @@
      <div class="row">
         <label class="col-md-2 control-label" for="textinput">E-Mail</label>
           <div class="col-md-2">
-          <input id="textinput" name="textinput" type="text" placeholder="E-Mail" class="form-control input-md">
+          {{ forms.email }}
           </div>
 
           <label class="col-md-2 control-label" for="textinput">Contact Number</label>
           <div class="col-md-2">
-          <input id="textinput" name="textinput" type="text" placeholder="Contact Number" class="form-control input-md">
+          {{ forms.contact }}
           </div>
     </div>
     </br>
@@ -32,85 +32,55 @@
     <div class="row">
         <label class="col-md-2 control-label" for="textinput">Subject</label>
           <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" placeholder="Subject" class="form-control input-md">
+          {{ forms.subject }}
           </div>
     </div>
     </br>
     <div class="row">
         <label class="col-md-2 control-label" for="textarea">Description</label>
+{% comment %}        <div class="panel-body">
+                        <textarea class="wysihtml5 form-control" rows="9"></textarea>
+        </div>{% endcomment %}
           <div class="col-md-5">
-              {% for field in forms %}
-                        <div class="fieldWrapper">
-                            {{ field }} {% for error in field.errors %}<error>{{ error|escape }}</error> {% endfor %}
-                        </div>
-              {% endfor %}
-
+          {{ forms.description }}
           </div>
     </div>
+
     </br>
 
     <div class="row">
 
       <label class="col-md-2 control-label" for="selectbasic">Request Type</label>
       <div class="col-md-2">
-        <select id="request_type" name="request_type" class="form-control">
-          <option value="1">Upgrade/Service</option>
-          <option value="2">Repair/Maintenence</option>
-          <option value="3">New Request</option>
-        </select>
+        {{ forms.request_type }}
       </div>
 
         <label class="col-md-1 control-label" for="selectbasic">Status</label>
       <div class="col-md-2">
-        <select id="status" name="status" class="form-control">
-            <option value="1">Open</option>
-            <option value="2">Resloved</option>
-            <option value="3">On Hold</option>
-            <option value="4">Postpone</option>
-        </select>
+       {{ forms.status }}
       </div>
     </div>
     </br>
     <div class="row">
     <label class="col-md-2 control-label" for="selectbasic">Impact</label>
       <div class="col-md-2">
-        <select id="impact" name="impact" class="form-control">
-            <option value="1">High</option>
-            <option value="2">Normal</option>
-            <option value="3">Medium</option>
-            <option value="4">Low</option>
-        </select>
+        {{ forms.impact }}
       </div>
 
         <label class="col-md-1 control-label" for="selectbasic">Urgency</label>
       <div class="col-md-2">
-        <select id="impact" name="impact" class="form-control">
-            <option value="1">High</option>
-            <option value="2">Normal</option>
-            <option value="3">Medium</option>
-            <option value="4">Low</option>
-        </select>
+        {{ forms.urgency }}
       </div>
     </div>
     </br>
     <div class="row">
         <label class="col-md-2 control-label" for="selectbasic">Mode</label>
       <div class="col-md-2">
-        <select id="impact" name="impact" class="form-control">
-            <option value="1">Web-Form</option>
-            <option value="2">Walk-in</option>
-            <option value="3">Call</option>
-            <option value="4">Instant-Messaging</option>
-        </select>
+        {{ forms.mode }}
       </div>
           <label class="col-md-1 control-label" for="selectbasic">Technical Team</label>
       <div class="col-md-2">
-        <select id="impact" name="impact" class="form-control">
-            <option value="1">Information System</option>
-            <option value="2">System Admin</option>
-            <option value="3">Networking Admin</option>
-            <option value="4">Cloud Admin</option>
-        </select>
+        {{ forms.team }}
       </div>
 
     </div>
@@ -131,4 +101,21 @@
 
 </fieldset>
 </form>
+
 {% endblock %}
+<script>
+
+    jQuery(document).ready(function(){
+        $('.wysihtml5').wysihtml5();
+
+        $('.summernote').summernote({
+            height: 200,                 // set editor height
+
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+
+            focus: true                 // set focus to editable area after initializing summernote
+        });
+    });
+
+</script>

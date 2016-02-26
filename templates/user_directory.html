@@ -1,0 +1,66 @@
+{% extends "main_template.html" %}
+{% load humanize %}
+{% block content %}
+    {% comment %}<div class="container">
+  <h2>User Directory</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>E-Mail</th>
+        <th>Date Join</th><th>Last Login</th><th>Address</th><th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in userR %}
+      <tr>
+        <td>{{ item.username}}</td>
+        <td>{{ item.email }}</td>
+          <td>{{ item.date_joined}}</td>
+          <td>{{ item.last_login |naturaltime }}</td>
+          <td>{{ item.address }}</td>
+          <td>{{ item.is_superuser }}</td>
+        <td></td>
+      </tr>
+
+    {% endfor%}
+      </tr>
+    </tbody>
+  </table>
+</div>{% endcomment %}
+    <div class="row">
+                    <div class="col-sm-12">
+                        <section class="panel">
+                            <header class="panel-heading ">
+                                <span class="tools pull-right">
+                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
+                                </span>
+                            </header>
+                            <table class="table colvis-data-table data-table">
+                            <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>E-Mail</th>
+                                <th>Date Join</th>
+                                <th>Last Login</th>
+                                <th>Address</th>
+                                <th>Role</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in userR %}
+                            <tr>
+                                <td>{{ item.username}}</td>
+                                <td>{{ item.email }}</td>
+                                <td>{{ item.date_joined}}</td>
+                                <td>{{ item.last_login |naturaltime }}</td>
+                                <td>{{ item.address }}</td>
+                                <td>{{ item.is_superuser }}</td>
+                            </tr>
+                            {% endfor%}
+                            </tbody>
+                            </table>
+                        </section>
+                    </div>
+                </div>
+{% endblock %}

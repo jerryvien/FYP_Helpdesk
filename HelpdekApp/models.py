@@ -16,8 +16,44 @@ TITLE_CHOICES = (
     ('MS', 'Ms.'),
 )
 STATUS_CHOICES = (
-    ('OPEN','Open'),
-    ('CLOSE','Close'),
+    ('Open','Open'),
+    ('Close','Close'),
+    ('On hold','On Hold'),
+    ('Postpone','Postpone')
+
+)
+URGENCY_CHOICES = (
+    ('High','High'),
+    ('Normal','Normal'),
+    ('Medium','Medium'),
+    ('Low','Low')
+
+)
+IMPACT_CHOICES = (
+    ('High','High'),
+    ('Normal','Normal'),
+    ('Medium','Medium'),
+    ('Low','Low')
+
+)
+MODE_CHOICES = (
+    ('Web Form','Web Form'),
+    ('Phone','Phone'),
+    ('Call','Call'),
+    ('Instant Messaging','Instant Messaging')
+
+)
+TEAM_CHOICES = (
+    ('MIS','MIS'),
+    ('System Admin','System Admin'),
+    ('Network Admin','Network Admin'),
+    ('Cloud Admin','Cloud Admin')
+
+)
+REQUEST_CHOICES = (
+    ('Upgrade/Service','Upgrade/Service'),
+    ('Repair/Maintenance','Repair/Maintenance'),
+    ('New Request','New Request')
 )
 
 class RegisterUser(Document):
@@ -28,11 +64,22 @@ class RegisterUser(Document):
 
 class RequestDetails(EmbeddedDocument):
     user = ReferenceField('CustomUser')
-    status = StringField(max_length=120)
+    ticket_number = StringField()
+    description = StringField()
     created_date_time = DateTimeField()
+    email = EmailField()
+    contact_number = StringField()
+    subject = StringField()
+    request_type = StringField()
+    status = StringField()
+    impact = StringField()
+    urgency = StringField()
+    mode = StringField()
+    team = StringField()
 
 class SystemLog(Document):
     user = ReferenceField('CustomUser')
+    role = StringField()
     content = StringField()
     created_date_time = DateTimeField(default=datetime.datetime.now())
 

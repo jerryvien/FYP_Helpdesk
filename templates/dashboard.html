@@ -27,4 +27,112 @@
   </table>
 </div>
 
+    <div class="row">
+                    <div class="col-sm-12">
+                        <section class="panel">
+                            <header class="panel-heading ">
+                                Column Visible Data Table
+                                <span class="tools pull-right">
+                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
+                                    <a class="t-close fa fa-times" href="javascript:;"></a>
+                                </span>
+                            </header>
+                            <table class="table colvis-data-table data-table">
+                            <thead>
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Content
+                                </th>
+                                <th>
+                                    Last Login
+                                </th>
+                                <th>
+                                    Item
+                                </th>
+                                <th>
+                                    Units
+                                </th>
+                                <th>
+                                    Unit Cost
+                                </th>
+                                <th>
+                                    Total
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in log %}
+                            <tr>
+                                <td>
+                                    {{ item.user.username }}
+                                </td>
+                                <td>
+                                    {{ item.content }}
+                                </td>
+                                <td>
+                                    {{ item.created_date_time|naturaltime}}
+                                </td>
+                                <td>
+                                    Binder
+                                </td>
+                                <td>
+                                    28
+                                </td>
+                                <td>
+                                    4.99
+                                </td>
+                                <td>
+                                    139.72
+                                </td>
+                            </tr>
+                            {% endfor%}
+                            </tbody>
+                            </table>
+                        </section>
+                    </div>
+                </div>
+
+    <div class="resTable1">
+				                  <table class="tables" width="100%" style="border:none;">
+				                    <tbody>
+				                    <tr>
+				                    <th style="border-top:none;" scope="row" class="tableFont" align="left">ID</th>
+				                    <td style="border-top:none;" class="tableFont2">131</td>
+				                    </tr>
+				                    <tr>
+				                    <th scope="row" class="tableFont" align="left">Status</th>
+				                    <td class="tableFont2"><div class="badge badge-close" style="width:40px;">Close</div></td>
+				                    </tr>
+				                    <tr>
+				                    <th scope="row" class="tableFont" align="left">Subject</th>
+				                    <td class="tableFont2">Pellentesque </td>
+				                    </tr>
+				                    <tr>
+				                    <th scope="row" class="tableFont" align="left">Department</th>
+				                    <td class="tableFont2">Admin</td>
+				                    </tr>
+				                    <tr>
+				                    <th scope="row" class="tableFont" align="left">Date Modified</th>
+				                    <td class="tableFont2">4 years ago</td>
+				                    </tr>
+				                    <tr>
+				                    <th scope="row" class="tableFont" align="left">Last Activity</th>
+				                    <td class="tableFont2">4 years ago</td>
+				                    </tr>
+				                    </tbody>
+				                  </table>
+				                <div class="paddingRL resTable1 mePadB">
+				                <div class="tableW">
+				                </div>
+				                    <div class="pull-right paddingTop">
+				                    	<a href=""><button class="btn btn-info btnDetails" type="button"> Details</button></a>
+						                <button class="btn btn-success btnDetails" type="button" data-toggle="modal" data-target="#myModal131"> Reopen</button>
+				                    </div>
+				                </div>
+				                </div>
+
+
 {% endblock %}

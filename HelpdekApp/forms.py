@@ -102,19 +102,50 @@ class ResetPasswordForm(forms.Form):
             errors(input, 'Invalid Username.')
 
 class Create_Ticket_Form(forms.Form):
-    status = forms.CharField(widget=forms.Textarea(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
+    description = forms.CharField(widget=forms.Textarea(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
                                                            main_key.PLACEHOLDER: 'Description',
                                                            main_key.AUTOFOCUS: True,
                                                            main_key.ONFOCUS : main_key.CURSORTOEND}))
+    subject = forms.CharField(widget=forms.TextInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
+                                                           main_key.PLACEHOLDER: 'Subject',
+                                                           main_key.AUTOFOCUS: True,
+                                                           main_key.ONFOCUS : main_key.CURSORTOEND}))
+    contact = forms.CharField(widget=forms.TextInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
+                                                           main_key.PLACEHOLDER: 'Contact',
+                                                           main_key.AUTOFOCUS: True,
+                                                           main_key.ONFOCUS : main_key.CURSORTOEND}))
+    email = forms.CharField(widget=forms.TextInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
+                                                           main_key.PLACEHOLDER: 'E-mail',
+                                                           main_key.AUTOFOCUS: True,
+                                                           main_key.ONFOCUS : main_key.CURSORTOEND}))
+
+    status = forms.ChoiceField(choices= STATUS_CHOICES,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
+    request_type = forms.ChoiceField(choices= REQUEST_CHOICES,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
+    impact = forms.ChoiceField(choices=IMPACT_CHOICES,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
+    urgency = forms.ChoiceField(choices= URGENCY_CHOICES,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
+    mode = forms.ChoiceField(choices= MODE_CHOICES,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
+    team = forms.ChoiceField(choices= TEAM_CHOICES,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
+
+
     def clean(self):
          cleaned_data = super(Create_Ticket_Form, self).clean()
-         status = cleaned_data.get('status')
+         subject = cleaned_data.get('subject')
+         contact = cleaned_data.get('contact')
+         email = cleaned_data.get('email')
+         desctiption = cleaned_data.get('description')
+         status= cleaned_data.get('status')
+         request_type = cleaned_data.get('request_type')
+         impact= cleaned_data.get('impact')
+         urgency= cleaned_data.get('urgency')
+         mode = cleaned_data.get('mode')
+         team = cleaned_data.get('team')
 
-    def clean_status(self):
+
+    def clean_desctiption(self):
             data = self.data
             fields = self.fields
             errors = self.add_error
-            input = 'status'
+            input = 'description'
 
 
 
