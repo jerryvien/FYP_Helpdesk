@@ -90,7 +90,7 @@ AUTHENTICATION_BACKENDS = (
 )
 AUTH_USER_MODEL = 'mongo_auth.MongoUser'
 MONGOENGINE_USER_DOCUMENT = 'HelpdekApp.models.CustomUser'
-MONGOENGINE_USER_DOCUMENT = 'mongoengine.django.auth.User'
+#MONGOENGINE_USER_DOCUMENT = 'mongoengine.django.auth.User'
 SESSION_ENGINE = 'mongoengine.django.sessions'
 
 import mongoengine
@@ -109,6 +109,14 @@ _MONGODB_DATABASE_HOST = \
 	% (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
 #, host=_MONGODB_DATABASE_HOST
 mongoengine.connect(_MONGODB_NAME)
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'aacs3173@gmail.com'
+EMAIL_HOST_PASSWORD = 'password3173 '
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

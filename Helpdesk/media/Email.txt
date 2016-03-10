@@ -1,0 +1,10 @@
+{{title}}
+
+The ticket {{ticket_id}} has been Logged.
+Time : {{current_datetime}}
+Title: {{ticket_subject}}
+{{description}}
+
+Ticket details: {{ticket_link}}
+
+Email sent datetime : {{current_datetime}}

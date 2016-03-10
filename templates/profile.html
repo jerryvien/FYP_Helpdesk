@@ -6,29 +6,6 @@
             <div class="wrapper no-pad">
 
             <div class="profile-desk">
-            <aside class="p-aside">
-                <section class="panel profile-info">
-                    <form>
-                        <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Whats in your mind today?"></textarea>
-                    </form>
-                    <footer class="panel-footer">
-                        <button class="btn btn-success pull-right">Post</button>
-                        <ul class="nav nav-pills">
-                            <li>
-                                <a href="#"><i class="fa fa-user"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-location-arrow"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class=" fa fa-camera"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-smile-o"></i></a>
-                            </li>
-                        </ul>
-                    </footer>
-                </section>
 {% load static from staticfiles %}
 
             </aside>
@@ -37,52 +14,32 @@
                     <div class="title">
                         <h1>Team Members</h1>
                     </div>
-                    <div class="team-m">
-                        <a href="#">
-                            <img src="{% static "images/img1.jpg"%}" alt=""/>
-                            <i class="online dot"></i>
-                        </a>
-                        <a href="#">
-                            <img src="{% static "images/img2.jpg"%}" alt=""/>
-                        </a>
-                        <a href="#">
-                            <img src="{% static "images/img4.jpg"%}" alt=""/>
-                            <i class="busy dot"></i>
-                        </a>
-                        <a href="#">
-                            <img src="{% static "images/img3.jpg"%}" alt=""/>
-                        </a>
-
-                        <a href="#">
-                            <img src="{% static "images/img1.jpg"%}" alt=""/>
-                            <i class="away dot"></i>
-                        </a>
-                        <a href="#">
-                            <img src="{% static "images/img2.jpg"%}" alt=""/>
-                        </a>
-                        <a href="#">
-                            <img src="{% static "images/img3.jpg"%}" alt=""/>
-                            <i class="offline dot"></i>
-                        </a>
-                    </div>
                 </div>
                 <div class="widget">
                     <div class="title">
                         <h1>About</h1>
                     </div>
-                    <p class="mbot20">Hello I am Dave Gomache  a web and user interface designer. I love to work with the application interface and the web elements.
+                    <p class="mbot20">Hello I am {{ user.username}} a web and user interface designer. I love to work with the application interface and the web elements.
                     </p>
                     <div class="bio-row">
-                        <p><span>Gender </span> Male </p>
+                        <p><span>Email</span> {{ user.email }}</p>
                     </div>
                     <div class="bio-row">
-                        <p><span> Project Done </span> 50 + </p>
+                        <p><span> Date Joined</span> {{ user.date_joined }}</p>
                     </div>
                     <div class="bio-row">
-                        <p><span> Skills </span> HTML, CSS, JavaScript </p>
+                        <p><span>Role</span>
+                            {% if user.is_superuser == True%}
+                                    Admin
+                                    {% else%}
+                                    Customer
+                                </p>
                     </div>
-                    <a href="#" class="btn btn-primary mtop10">Read More</a>
+
+                                <a href="/profile_edit/{{ user.id }}/" data-toggle="modal" class="btn btn-primary mtop10">Read More</a>
+
                 </div>
+                {% endif %}
 
                 <div class="widget">
                     <div class="title">
@@ -92,17 +49,17 @@
                     <ul class="p-list">
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i> Total Product Sales  <span class="pull-right">23456</span>
+                                <i class="fa fa-circle-o"></i> Total Ticket Raised  <span class="pull-right">{{ leng }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i>  Total Product Refer  <span class="pull-right">$234</span>
+                                <i class="fa fa-circle-o"></i>  Total Ticket Resolved  <span class="pull-right">{{ leng }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i>  Total Earn  <span class="pull-right"> $345000</span>
+                                <i class="fa fa-circle-o"></i>  Total KPI   <span class="pull-right"></span>
                             </a>
                         </li>
                     </ul>
@@ -122,7 +79,7 @@
                             </div>
                             <div class="progress progress-xs">
                                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                    <span class="sr-only">70% </span>
+                                    <span class="sr-only">40% </span>
                                 </div>
                             </div>
                         </div>
@@ -167,4 +124,24 @@
 
             </div>
             <!--body wrapper end-->
+    <!-- Modal -->
+              <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="forgotPass" class="modal fade">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                              <h4 class="modal-title">Assign {{ user.username }} to agent ?</h4>
+                          </div>
+                      <form class="form-signin" id="signupForm" method="post" action="/profile/{{ user.id }}/" method="post">{% csrf_token %}
+                          {% for field in forms %}
+                            <div class="fieldWrapper">
+                            {{ field }} {% for error in field.errors %}<error>{{ error|escape }}</error> {% endfor %}
+                            </div>
+                            {% endfor %}
+                          <button class="btn btn-primary mtop10" type="submit">Assign</button>
+                      </form>
+                      </div>
+                  </div>
+              </div>
+              <!-- modal -->
 {% endblock %}

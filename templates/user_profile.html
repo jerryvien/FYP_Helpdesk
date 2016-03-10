@@ -1,0 +1,168 @@
+{% extends "user_template.html" %}
+{% block content %}
+<!--body wrapper start-->
+            <div class="wrapper no-pad">
+
+            <div class="profile-desk">
+{% load static from staticfiles %}
+            </aside>
+            <aside class="p-short-info">
+                <div class="widget">
+                    <div class="title">
+                        <h1>About</h1>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Display name</span> {{ user.display_name }}</p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Contact</span> {{ user.contact_number }}</p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Role</span>
+                            {% if user.is_superuser == True%}
+                                    Admin
+                            {% else%}
+                                    Customer
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Email</span> {{ user.email }}</p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span> Date Joined</span> {{ user.date_joined }}</p>
+                    </div>
+
+                    <div class="bio-row">
+                        <p><span>Address</span> {{ user.address }}</p>
+                    </div>
+                    <a href="#editProfile" class="btn btn-primary mtop10" data-toggle="modal">Edit Detail</a>
+                </div>
+            <!-- Modal -->
+              <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="editProfile" class="modal fade">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                              <h4 class="modal-title">Edit Profile</h4>
+                          </div>
+                          <div class="modal-body">
+                              <h3>{{ user.display_name }} Personal info</h3>
+                                <form class="form-horizontal" id="signupForm" role="form" method="post" action="" >{% csrf_token %}
+                                  <div class="form-group">
+                                    <label class="col-lg-3 control-label">Display name:</label>
+                                    <div class="col-lg-8">
+                                        {{ forms.display_name }}
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-lg-3 control-label">Email:</label>
+                                    <div class="col-lg-8">
+                                      {{ forms.email }}
+                                    </div>
+                                  </div>
+                                     <div class="form-group">
+                                    <label class="col-lg-3 control-label">Contact Number:</label>
+                                    <div class="col-lg-8">
+                                      {{ forms.contact_number }}
+                                    </div>
+                                  </div>
+                                     <div class="form-group">
+                                    <label class="col-lg-3 control-label">Address:</label>
+                                    <div class="col-lg-8">
+                                      {{ forms.address }}
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-md-3 control-label">Password:</label>
+                                    <div class="col-md-8">
+                                      {{ forms.password }}
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-md-3 control-label"></label>
+                                    <div class="col-md-8">
+                                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                                      <span></span>
+                                      <button data-dismiss="modal" class="btn btn-default" type="cancel">Clear</button>
+                                    </div>
+                                  </div>
+                                </form>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- modal -->
+                <div class="widget">
+                    <div class="title">
+                        <h1 class="pull-left">Ticket Performance</h1>
+                    </div>
+                    <ul class="p-list">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-circle-o"></i> Total ticket open  <span class="pull-right">{{ leng }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-circle-o"></i>  Total ticket closed  <span class="pull-right">{{ leng }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-circle-o"></i>  Total ticket raised  <span class="pull-right"> {{ leng }}</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="widget">
+                    <div class="title">
+                        <h1 class="pull-left">Work Progress</h1>
+                        <a href="#" class="pull-right v-all"> View All </a>
+                    </div>
+                    <div class="sale-monitor work-progress">
+                        <div class="states">
+                            <div class="info">
+                                <div class="desc pull-left">Theme Forest</div>
+                                <div class="percent pull-right">70%</div>
+                            </div>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="10" aria-valuemax="100" style="width: 70%">
+                                    <span class="sr-only">70% </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="states">
+                            <div class="info">
+                                <div class="desc pull-left">Graphics River</div>
+                                <div class="percent pull-right">45%</div>
+                            </div>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                    <span class="sr-only">45% </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="states">
+                            <div class="info">
+                                <div class="desc pull-left">Code Canyon</div>
+                                <div class="percent pull-right">35%</div>
+                            </div>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 35%">
+                                    <span class="sr-only">35% </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+            </div>
+
+            </div>
+            <!--body wrapper end-->
+{% endblock %}

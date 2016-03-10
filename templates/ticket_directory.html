@@ -39,25 +39,36 @@
                             <table class="table colvis-data-table data-table">
                             <thead>
                             <tr>
-                                <th>User</th>
+                                <th>Ticket ID</th>
                                 <th>Subject</th>
                                 <th>Created Time</th>
                                 <th>Request Type</th>
                                 <th>Status</th>
                                 <th>Urgency</th>
+                                <th>Request By</th>
+                                <th>Handle By</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for item in userR %}
-                                {{ userR.ticket|length}}
                                 {% for item2 in item.ticket %}
                                     <tr>
-                                        <td>{{ item2.user.username}}</td>
-                                        <td>{{ item2.subject }}</td>
+                                        <td><a href="/ticket_details/{{ item2.ticket_number}}" value="">{{ item2.ticket_number}}</a></td>
+                                        <td> {{ item2.subject }}</td>
                                         <td>{{ item2.created_date_time }}</td>
                                         <td>{{ item2.request_type}}</td>
                                         <td>{{ item2.status }}</td>
-                                        <td>{{ item2.urgency }}</td>
+                                        {% if item2.urgency == 'High'%}
+                                            <td><span class="label label-danger label-mini">{{ item2.urgency }}</span></td>
+                                        {% elif item2.urgency == 'Normal'%}
+                                            <td><span class="label label-warning label-mini">{{ item2.urgency }}</span></td>
+                                        {% else%}
+                                            <td><span class="label label-success label-mini">{{ item2.urgency }}</span></td>
+                                        {% endif %}
+                                        <td><a href="/profile_edit/{{ item2.user.id}}" class="">{{ item2.user.username }}</a></td>
+                                        <td>{{ item2.team }}</td>
+                                        {% if item2.urgency == 'High'%}
+                                        {% endif %}
                                     </tr>
                                     {% endfor %}
                             {% endfor%}
@@ -65,5 +76,7 @@
                             </table>
                         </section>
                     </div>
-                </div>
+    </div>
+
+
 {% endblock %}

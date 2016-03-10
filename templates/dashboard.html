@@ -1,5 +1,8 @@
 {% extends "main_template.html" %}
 {% load humanize %}
+{% load static from staticfiles %}
+<script src="{% static "https://code.highcharts.com/highcharts.js"%}"></script>
+<script src="{% static "https://code.highcharts.com/modules/exporting.js"%}"></script>
 {% block content %}
 
     <div class="container">
@@ -134,5 +137,9 @@
 				                </div>
 				                </div>
 
+
+
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 {% endblock %}

@@ -1,0 +1,269 @@
+{% extends 'main_template.html' %}
+{% load humanize %}
+{% block content %}
+{% comment %}<form class="form-horizontal" action="/create_ticket/" method="post">{% csrf_token %}
+<fieldset>
+
+<!-- Form Name -->
+    <legend>Requester Details (Admin)</legend>
+    <div class="row">
+        <label class="col-md-2 control-label" for="textinput">Requester Name</label>
+             {% for item in userR %}
+                 {% for item2 in item.ticket %}
+                     {% if item2.ticket_number == ticket_id%}
+                         <tr>
+                             <td>{{ item2.user.username}}</td>
+                             <td><a href="/ticket_details/{{ item2.ticket_number}}" value="">{{ item2.ticket_number}}</a></td>
+                             <td> <a href="/create_ticket_admin/" class="" value="{{ item2.subject }}">{{ item2.subject }}</a></td>
+                             <td>{{ item2.created_date_time }}</td>
+                             <td>{{ item2.request_type}}</td>
+                             <td>{{ item2.status }}</td>
+                             <td>{{ item2.urgency }}</td>
+                         </tr>
+
+
+
+    </div>
+    </br>
+     <div class="row">
+        <label class="col-md-2 control-label" for="textinput">E-Mail</label>
+          <div class="col-md-2">
+          </div>
+
+          <label class="col-md-2 control-label" for="textinput">Contact Number</label>
+          <div class="col-md-2">
+          </div>
+    </div>
+    </br>
+
+<legend>Request Details</legend>
+
+<!-- Text input-->
+
+    <div class="row">
+        <label class="col-md-2 control-label" for="textinput">Subject</label>
+          <div class="col-md-4">
+              <input class="form-control input-lg" id="inputlg" type="text" value="{{ item2.subject }}">
+          </div>
+    </div>
+    </br>
+    <div class="row">
+        <label class="col-md-2 control-label" for="textarea">Description</label>
+        <div class="panel-body">
+                        <textarea class="wysihtml5 form-control" rows="9"></textarea>
+        </div>
+          <div class="col-md-5">
+              {{ item2.description }}
+          </div>
+    </div>
+
+    </br>
+
+    <div class="row">
+
+      <label class="col-md-2 control-label" for="selectbasic">Request Type</label>
+      <div class="col-md-2">
+          {{ item2.request_type}}
+      </div>
+
+        <label class="col-md-1 control-label" for="selectbasic">Status</label>
+      <div class="col-md-2">
+          {{ item2.status }}
+      </div>
+    </div>
+    </br>
+    <div class="row">
+    <label class="col-md-2 control-label" for="selectbasic">Impact</label>
+      <div class="col-md-2">
+          {{ item2.impact }}
+      </div>
+
+        <label class="col-md-1 control-label" for="selectbasic">Urgency</label>
+      <div class="col-md-2">
+          {{ item2.urgency }}
+      </div>
+    </div>
+    </br>
+    <div class="row">
+        <label class="col-md-2 control-label" for="selectbasic">Mode</label>
+      <div class="col-md-2">
+          {{ item2.mode }}
+      </div>
+          <label class="col-md-1 control-label" for="selectbasic">Technical Team</label>
+      <div class="col-md-2">
+          {{ item2.team }}
+      </div>
+
+    </div>
+                     {% endif %}
+                 {% endfor %}
+             {% endfor%}
+
+
+
+
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="button1id"></label>
+  <div class="col-md-8">
+    <button id="button1id" name="button1id" class="btn btn-success" type="submit">Submit</button>
+    <button id="button2id" name="button2id" class="btn btn-danger" type="reset">Cancel</button>
+  </div>
+</div>
+
+</fieldset>
+</form>{% endcomment %}
+
+    <div class="container-fluid">
+	<div class="row">
+        {% for item in userR %}
+                 {% for item2 in item.ticket %}
+                     {% if item2.ticket_number == ticket_id%}
+                    <form class="form-horizontal" action="/ticket_details/{{ ticket_id }}/" method="post">{% csrf_token %}
+<fieldset>
+
+<!-- Form Name -->
+    <legend>Requester Details</legend>
+    <div class="row">
+        <label class="col-md-2 control-label" for="textinput">Requester Name</label>
+          <div class="col-md-3">
+          {{ item.username }}
+          </div>
+    </div>
+    </br>
+     <div class="row">
+        <label class="col-md-2 control-label" for="textinput">E-Mail</label>
+          <div class="col-md-2">
+          {{ item.email }}
+          </div>
+
+          <label class="col-md-2 control-label" for="textinput">Contact Number</label>
+          <div class="col-md-2">
+          {{ item.contact_number }}
+          </div>
+    </div>
+    <legend>Agent Details</legend>
+    <div class="row">
+        <label class="col-md-2 control-label" for="textinput">Requester Name</label>
+          <div class="col-md-3">
+          {{ item2.agent.username }}
+          </div>
+    </div>
+    </br>
+     <div class="row">
+        <label class="col-md-2 control-label" for="textinput">E-Mail</label>
+          <div class="col-md-2">
+          {{ item2.agent.email }}
+          </div>
+
+          <label class="col-md-2 control-label" for="textinput">Contact Number</label>
+          <div class="col-md-2">
+          {{ item2.agent.contact_number }}
+          </div>
+    </div>
+    </br>
+
+<legend>Request Details</legend>
+
+<!-- Text input-->
+
+    <div class="row">
+        <label class="col-md-2 control-label" for="textinput">Subject</label>
+          <div class="col-md-4">
+          {{ item2.subject }}
+          </div>
+    </div>
+    </br>
+    <div class="row">
+        <label class="col-md-2 control-label" for="textarea">Description</label>
+          <div class="col-md-5">
+          {{ item2.description }}
+          </div>
+    </div>
+
+    </br>
+
+    <div class="row">
+
+      <label class="col-md-2 control-label" for="selectbasic">Request Type</label>
+      <div class="col-md-2">
+        {{ forms.request_type }}
+      </div>
+
+        <label class="col-md-1 control-label" for="selectbasic">Status</label>
+      <div class="col-md-2">
+       {{ forms.status }}
+      </div>
+    </div>
+    </br>
+    <div class="row">
+    <label class="col-md-2 control-label" for="selectbasic">Impact</label>
+      <div class="col-md-2">
+        {{ forms.impact }}
+      </div>
+
+        <label class="col-md-1 control-label" for="selectbasic">Urgency</label>
+      <div class="col-md-2">
+        {{ forms.urgency }}
+      </div>
+    </div>
+    </br>
+    <div class="row">
+        <label class="col-md-2 control-label" for="selectbasic">Mode</label>
+      <div class="col-md-2">
+        {{ item2.mode }}
+      </div>
+          <label class="col-md-1 control-label" for="selectbasic">Technical Team</label>
+      <div class="col-md-2">
+        {{ forms.team }}
+      </div>
+    </div>
+    </br>
+      <div class="row">
+        <label class="col-md-2 control-label" for="textarea">Public Log</label>
+          <div class="col-md-5">
+              {% comment %}<textarea class="wysihtml5 form-control" rows="5"></textarea>{% endcomment %}
+              {{ forms.public_log }}
+          </div>
+      </div>
+
+
+
+
+
+
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="button1id"></label>
+  <div class="col-md-8">
+    <button id="button1id" name="button1id" class="btn btn-success" type="submit">Submit</button>
+    <button id="button2id" name="button2id" class="btn btn-danger" type="reset">Cancel</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+                     {% endif %}
+                 {% endfor %}
+        {% endfor%}
+
+{% endblock %}
+
+<script>
+
+    jQuery(document).ready(function(){
+        $('.wysihtml5').wysihtml5();
+
+        $('.summernote').summernote({
+            height: 200,                 // set editor height
+
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+
+            focus: true                 // set focus to editable area after initializing summernote
+        });
+    });
+
+</script>

@@ -62,11 +62,22 @@ class RegisterUser(Document):
     password = StringField(min_length=6, max_length=12,required=True)
     confirm_password = StringField(min_length=6, max_length=12,required=True)
 
+class LogDetails(EmbeddedDocument):
+    department = StringField()
+    #user = ReferenceField('CustomerUser')
+    public_log = StringField()
+    agent_id = StringField()
+    log_created_date = DateTimeField()
+
 class RequestDetails(EmbeddedDocument):
     user = ReferenceField('CustomUser')
+    agent = ReferenceField('CustomUser')
     ticket_number = StringField()
     description = StringField()
     created_date_time = DateTimeField()
+    last_change_date = DateTimeField()
+    log = ListField(EmbeddedDocumentField(LogDetails))
+    public_log = StringField()
     email = EmailField()
     contact_number = StringField()
     subject = StringField()
@@ -77,6 +88,9 @@ class RequestDetails(EmbeddedDocument):
     mode = StringField()
     team = StringField()
 
+
+
+
 class SystemLog(Document):
     user = ReferenceField('CustomUser')
     role = StringField()
@@ -85,7 +99,12 @@ class SystemLog(Document):
 
 class CustomUser(User):
     address = StringField()
+    contact_number = StringField(max_length=12)
     display_name = StringField(max_length=10)
+    team = StringField()
+    status = StringField()
+    agent_id = StringField()
+
     #ticket = EmbeddedDocumentField(RequestDetails)
     ticket = ListField(EmbeddedDocumentField(RequestDetails))
     #status = StringField(choices= STATUS_CHOICES)

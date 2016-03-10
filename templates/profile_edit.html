@@ -1,0 +1,131 @@
+{% extends "main_template.html" %}
+{% load humanize %}
+{% block content %}
+{% comment %}<div class="container log-row">
+          <form class="form-signin" id="signupForm" method="post" action="/profile_edit/{{ user2.id }}/" method="post">{% csrf_token %}
+                          {% for field in forms %}
+                            <div class="fieldWrapper">
+                            {{ field }} {% for error in field.errors %}<error>{{ error|escape }}</error> {% endfor %}
+                            </div>
+                            {% endfor %}
+                          <button class="btn btn-primary mtop10" type="submit">Save</button>
+                      </form>
+      </div>{% endcomment %}
+
+    <div class="container">
+    <h1>Edit Profile</h1>
+  	<hr>
+	<div class="row">
+      <!-- left column -->
+        <table class="table table-striped custom-table table-hover">
+                <thead>
+                <tr>
+                    <th><i class="glyphicon glyphicon-education"></i> Username</th>
+                    <th class="hidden-xs"><i class="glyphicon glyphicon-envelope"></i> Email</th>
+                    <th><i class="glyphicon glyphicon-time"></i> Date Join</th>
+                    <th><i class="glyphicon glyphicon-repeat"></i> Last Login</th>
+                    <th><i class=" glyphicon glyphicon-home"></i> Address</th>
+                    <th><i class="glyphicon glyphicon-phone-alt"></i> Contact</th>
+                    <th><i class="glyphicon glyphicon-user"></i> Role</th>
+                    <th class="hidden-xs"><i class="fa fa-cogs"></i> Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in userR %}
+                <tr>
+                    <td>{{ item.username}}</td>
+                    <td><a href="#">{{ item.email }}</a></td>
+                    <td class="hidden-xs">{{ item.date_joined}}</td>
+                    <td>{{ item.last_login |naturaltime }}</td>
+                    <td>{{ item.address }}</td>
+                    <td>{{ item.contact_number }}</td>
+                    {% if item.is_superuser == True%}
+                        <td><span class="label label-info label-mini" id="role{{ item.id }}">Admin</span></td>
+                    {% else%}
+                        <td><span class="label label-danger label-mini" id="role{{ item.id }}">Customer</span></td>
+                    {% endif %}
+                    <td class="hidden-xs">
+                        {% comment %}--this name need to indicate the button, u can use id also, like the role there
+                        --use data-user-id so u can get the primary key at site.js by $(this).data('userId');{% endcomment %}
+                        {% if item.is_superuser == False%}
+                            <a class="btn btn-success btn-xs fa fa-check" name="setBtn" href="#/" data-user-id="{{ item.id }}">Assign</a>
+                        {% else %}
+                            <a class="btn btn-danger btn-xs fa fa-remove" name="setBtn" href="#/" data-user-id="{{ item.id }}">Unassign</a>
+                        {% endif %}
+                        <a class="btn btn-primary btn-xs fa fa-pencil" data-toggle="modal" href="/profile_edit/{{ item.id }}">Edit</a>
+                        <a class="btn btn-success btn-xs fa fa-trash-o" data-toggle="modal" href="/user_profile/{{ item.id }}"></a>
+
+                        {% comment %}--example
+                        <input type="text" id="myName">{% endcomment %}
+                    </td>
+                </tr>
+                {% endfor%}
+                </tbody>
+        </table>
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <div class="alert alert-info alert-dismissable">
+          <i class="fa fa-coffee"></i>
+          Please be <strong>caution</strong>. Use this function carefully.
+        </div>
+        <h3>Personal info</h3>
+        <form class="form-horizontal" id="signupForm" role="form" method="post" action="/profile_edit/{{ user2.id }}/" >{% csrf_token %}
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Display name:</label>
+            <div class="col-lg-8">
+                {{ forms.display_name }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              {{ forms.email }}
+            </div>
+          </div>
+             <div class="form-group">
+            <label class="col-lg-3 control-label">Contact Number:</label>
+            <div class="col-lg-8">
+              {{ forms.contact_number }}
+            </div>
+          </div>
+             <div class="form-group">
+            <label class="col-lg-3 control-label">Address:</label>
+            <div class="col-lg-8">
+              {{ forms.address }}
+            </div>
+          </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Role:</label>
+                <div class="col-lg-8">
+                  <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Dropdown
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+                </div>
+            </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+                <button class="btn btn-primary" type="submit">Save Changes</button>
+              <span></span>
+              <button class="btn btn-default" type="cancel">Clear</button>
+            </div>
+          </div>
+        </form>
+          <success></success>
+      </div>
+  </div>
+
+</div>
+<hr>
+
+{% endblock %}

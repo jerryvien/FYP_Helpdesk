@@ -1,0 +1,52 @@
+{% extends 'user_template.html' %}
+{% block content %}
+<form class="form-horizontal" action="/user_create_ticket/" method="post">{% csrf_token %}
+<fieldset>
+
+<!-- Form Name -->
+<legend>Request Details</legend>
+
+<!-- Text input-->
+    <div class="row">
+        <label class="col-md-2 control-label" for="textinput">Subject</label>
+          <div class="col-md-4">
+          {{ forms.subject }}
+          </div>
+    </div>
+    </br>
+    <div class="row">
+        <label class="col-md-2 control-label" for="textarea">Description</label>
+          <div class="col-md-5">
+          {{ forms.description }}
+          </div>
+    </div>
+
+    </br>
+
+    <div class="row">
+
+      <label class="col-md-2 control-label" for="selectbasic">Request Type</label>
+      <div class="col-md-2">
+        {{ forms.request_type }}
+      </div>
+        <label class="col-md-1 control-label" for="selectbasic">Urgency</label>
+      <div class="col-md-2">
+        {{ forms.urgency }}
+      </div>
+    </div>
+
+    </br>
+
+</br>
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="button1id"></label>
+  <div class="col-md-8">
+    <button id="button1id" name="button1id" class="btn btn-success" type="submit">Submit</button>
+    <button id="button2id" name="button2id" class="btn btn-danger" type="reset">Cancel</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+{% endblock %}
