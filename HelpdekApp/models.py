@@ -56,6 +56,17 @@ REQUEST_CHOICES = (
     ('New Request','New Request')
 )
 
+LEAVE_CHOICE = (
+    ('Medical Leave', 'Medical Leave'),
+    ('Emergency Leave', 'Emergency Leave'),
+    ('Paternity Leave', 'Paternity Leave'),
+    ('Unpaid Leave', 'Unpaid Leave')
+)
+AGENT_CHOICE = (
+    ('Admin', 'Admin'),
+    ('Jerry', 'Jerry')
+)
+
 class RegisterUser(Document):
     userName = StringField(max_length=10, required=True)
     email = EmailField(required=True)
@@ -69,6 +80,16 @@ class LogDetails(EmbeddedDocument):
     agent_id = StringField()
     log_created_date = DateTimeField()
 
+class Calendar(Document):
+    calanderid = StringField()
+    date = DateTimeField()
+    ph = BooleanField()
+    weekend = BooleanField()
+
+class TextDic(Document):
+    text = StringField()
+    requestType = StringField()
+
 class RequestDetails(EmbeddedDocument):
     user = ReferenceField('CustomUser')
     agent = ReferenceField('CustomUser')
@@ -76,6 +97,8 @@ class RequestDetails(EmbeddedDocument):
     description = StringField()
     created_date_time = DateTimeField()
     last_change_date = DateTimeField()
+    targeted_resolved_date = DateTimeField()
+    last_resolved_date = DateTimeField()
     log = ListField(EmbeddedDocumentField(LogDetails))
     public_log = StringField()
     email = EmailField()
@@ -88,7 +111,14 @@ class RequestDetails(EmbeddedDocument):
     mode = StringField()
     team = StringField()
 
-
+class LeaveRequest(EmbeddedDocument):
+    user = ReferenceField('CustomUser')
+    typeLeave = StringField()
+    startDate = DateTimeField()
+    endDate = DateTimeField()
+    reason = StringField()
+    status = StringField()
+    leave_id = StringField()
 
 
 class SystemLog(Document):
@@ -107,9 +137,12 @@ class CustomUser(User):
 
     #ticket = EmbeddedDocumentField(RequestDetails)
     ticket = ListField(EmbeddedDocumentField(RequestDetails))
+    leave = ListField(EmbeddedDocumentField(LeaveRequest))
     #status = StringField(choices= STATUS_CHOICES)
 
-
+class Calender(Document):
+    id = StringField()
+    name = StringField()
 
 
 

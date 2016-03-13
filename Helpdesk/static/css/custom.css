@@ -1,0 +1,101 @@
+.home-count {
+    border-bottom: 1px solid #F1F1F1;
+    border-top: 1px solid #F1F1F1;
+    margin: 0;
+    padding: 10px 0;
+}
+
+
+.count-value {
+    color: #555;
+    font-size: 30px;
+    line-height: normal;
+}
+
+.bgwhite, .whiteBg {
+    background-color: #fff!important;
+}
+
+.p15 {
+    padding: 15px;
+}
+.listviewBorder {
+    border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd\0;
+}
+.listviewBorder {
+    border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd\0;
+}
+
+.home-list .head {
+    background: #F1F1F1;
+    border-bottom: 1px solid #EAEAEA;
+    padding: 7px 10px;
+    color: #666;
+    font-size: 13px;
+    text-shadow: 1px 1px 0 #FFF;
+}
+
+.f11 {
+    font-size: 11px;
+    font-family: Tahoma, sans-serif, Verdana;
+}
+.ptb10lr5 {
+    padding: 10px 5px;
+}
+.bdrbtm {
+    border-bottom: #ddd dotted 1px;
+}
+
+.pb10ie {
+    _padding-bottom: 10px;
+}
+.link3, .Link3, .Lissubj a, .link1, .link {
+    color: #000;
+    text-decoration: none;
+}
+.i-tag, .i-tag-img {
+    display: inline-block;
+    vertical-align: middle;
+}
+.f10, .f9 {
+    font-size: 10px;
+}
+.mt2 {
+    margin-top: 2px;
+}
+.fright, .fr, .flRight, .floatR {
+    float: right;
+}
+
+.mr7 {
+    margin-right: 7px;
+}
+.ml2 {
+    margin-left: 2px;
+}
+
+.i-tag, .i-tag-img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.small, td {
+    font-size: 12px;
+    line-height: 18px;
+    color: black;
+}
+.lightgray {
+    color: #888;
+}
+.orangetxt {
+    color: #f79700;
+}
+
+.f11 {
+    font-size: 11px;
+    font-family: Tahoma, sans-serif, Verdana;
+}

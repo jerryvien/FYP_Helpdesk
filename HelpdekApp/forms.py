@@ -169,6 +169,7 @@ class Create_Ticket_Form(forms.Form):
                                                            main_key.ONFOCUS : main_key.CURSORTOEND}))
 
     status = forms.ChoiceField(choices= STATUS_CHOICES,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
+    agent = forms.ChoiceField(choices= AGENT_CHOICE,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
     request_type = forms.ChoiceField(choices= REQUEST_CHOICES,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
     impact = forms.ChoiceField(choices=IMPACT_CHOICES,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
     urgency = forms.ChoiceField(choices= URGENCY_CHOICES,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
@@ -247,6 +248,38 @@ class Edit_Ticket_Form(forms.Form):
             fields = self.fields
             errors = self.add_error
             input = 'description'
+
+
+from functools import partial
+#DateInput = partial(forms.DateInput, {'class': 'datepicker'})
+class LeaveForm(forms.Form):
+    typeLeave = forms.ChoiceField(choices=LEAVE_CHOICE,widget=forms.Select(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS}))
+
+    #startDate = forms.DateField(widget=DateInput())
+
+    #endDate = forms.DateField(widget=DateInput())
+
+    reason = forms.CharField(widget=forms.Textarea(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS,
+                                                         main_key.PLACEHOLDER:'Reason',
+                                                         main_key.AUTOFOCUS:True,
+                                                         main_key.ONFOCUS: main_key.CURSORTOEND}))
+
+
+    startDate = forms.CharField(widget=forms.TextInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS_BUTTON,
+                                                                 main_key.PLACEHOLDER: 'Start Date',
+                                                                 main_key.AUTOFOCUS: True,
+                                                                 main_key.ONFOCUS : main_key.CURSORTOEND}))
+
+    endDate = forms.CharField(widget=forms.TextInput(attrs={main_key.CLASS: main_key.FORM_CONTROL_CLASS_BUTTON,
+                                                             main_key.PLACEHOLDER: 'End Date',
+                                                             main_key.AUTOFOCUS: True,
+                                                             main_key.ONFOCUS : main_key.CURSORTOEND}))
+    def clean(self):
+        cleaned_data = super(LeaveForm, self).clean()
+        types = cleaned_data.get('type')
+        startDate = cleaned_data.get('startDate')
+        endDate = cleaned_data.get('endDate')
+        reason = cleaned_data.get('reason')
 
 
 

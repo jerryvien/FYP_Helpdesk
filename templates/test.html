@@ -1,424 +1,644 @@
 {% extends "main_template.html" %}
+{% load static from staticfiles %}
 
 {% block content %}
-     {% load static from staticfiles %}
-{% comment %} <div class="wrapper">
+{% comment %}<div class="container" style="margin-top: 35px">
+  <div class="page-header page-heading">
+    <h1 class="pull-left">Forums</h1>
+    <ol class="breadcrumb pull-right where-am-i">
+      <li><a href="#">Forums</a></li>
+      <li class="active">List of topics</li>
+    </ol>
+    <div class="clearfix"></div>
+  </div>
+  <p class="lead">This is the right place to discuss any ideas, critics, feature requests and all the ideas regarding our website. Please follow the forum rules and always check FAQ before posting to prevent duplicate posts.</p>
+  <table class="table forum table-striped">
+    <thead>
+      <tr>
+        <th class="cell-stat"></th>
+        <th>
+          <h3>Important</h3>
+        </th>
+        <th class="cell-stat text-center hidden-xs hidden-sm">Topics</th>
+        <th class="cell-stat text-center hidden-xs hidden-sm">Posts</th>
+        <th class="cell-stat-2x hidden-xs hidden-sm">Last Post</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
+        <td>
+          <h4><a href="#">Frequently Asked Questions</a><br><small>Some description</small></h4>
+        </td>
+        <td class="text-center hidden-xs hidden-sm"><a href="#">9 542</a></td>
+        <td class="text-center hidden-xs hidden-sm"><a href="#">89 897</a></td>
+        <td class="hidden-xs hidden-sm">by <a href="#">John Doe</a><br><small><i class="fa fa-clock-o"></i> 3 months ago</small></td>
+      </tr>
+      <tr>
+        <td class="text-center"><i class="fa fa-exclamation fa-2x text-danger"></i></td>
+        <td>
+          <h4><a href="#">Important changes</a><br><small>Category description</small></h4>
+        </td>
+        <td class="text-center hidden-xs hidden-sm"><a href="#">6532</a></td>
+        <td class="text-center hidden-xs hidden-sm"><a href="#">152123</a></td>
+        <td class="hidden-xs hidden-sm">by <a href="#">Jane Doe</a><br><small><i class="fa fa-clock-o"></i> 1 years ago</small></td>
+      </tr>
+    </tbody>
+  </table>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Multiple Statistics
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                    <a class="t-collapse fa fa-chevron-down" href="javascript:;"></a>
-                                    <a class="t-close fa fa-times" href="javascript:;"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <div id="multi-sates">
-                                    <div id="multi-states-container" class="f-c-space">
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="col-md-6">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Realtime Statistics
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                    <a class="t-collapse fa fa-chevron-down" href="javascript:;"></a>
-                                    <a class="t-close fa fa-times" href="javascript:;"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <div id="real-time">
-                                    <div id="real-time-container" class="f-c-space">
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+</div>{% endcomment %}
 
+#forum listing with detail
+{% comment %}
+<div class="container">
+  <h1 class="page-header"><i class="fa fa-pencil"></i> Interesting topic <a class="btn btn-default" href="topics.html"><i class="fa fa-backward"></i> Back to topics</a></h1>
+  <p class="lead">Hello! This is the awesome slogan fof your topic.</p>
+  <p class="alert alert-danger">This topic is <strong>2 years</strong> old. It can be missleading. Add warnings just like any other alerts with Bootstrap!</p>
+  <ul class="media-list forum">
+    <!-- Forum Post -->
+    <li class="media well">
+      <div class="pull-left user-info" href="#">
+        <img class="avatar img-circle img-thumbnail" src="http://snipplicious.com/images/guest.png"
+          width="64" alt="Generic placeholder image">
+        <strong><a href="user.html">John Doe</a></strong>
+        <small>Member</small>
+        <br>
+        <small class="btn-group btn-group-xs">
+        <a class="btn btn-default"><i class="fa fa-thumbs-o-up"></i></a>
+        <a class="btn btn-default"><i class="fa fa-thumbs-o-down"></i></a>
+        <strong class="btn btn-success">+451</strong>
+        </small>
+      </div>
+      <div class="media-body">
+        <!-- Post Info Buttons -->
+        <div class="forum-post-panel btn-group btn-group-xs">
+          <a href="#" class="btn btn-default"><i class="fa fa-clock-o"></i> Posted 3 weeks ago</a>
+          <a href="#" class="btn btn-danger"><i class="fa fa-warning"></i> Report post</a>
+        </div>
+        <!-- Post Info Buttons END -->
+        <!-- Post Text -->
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit</b>. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
+        <p>Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. </p>
+        <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. <i>Lorem ipsum dolor sit amet, consectetur adipiscing elit</i>. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. <b>Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa</b>. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. <b>Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis</b>. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. </p>
+        <!-- Post Text EMD -->
+      </div>
+    </li>
+    <!-- Forum Post END -->
+    <!-- Forum Post -->
+    <li class="media well">
+      <div class="pull-left user-info" href="#">
+        <img class="avatar img-circle img-thumbnail" src="http://snipplicious.com/images/guest.png"
+          width="64" alt="Generic placeholder image">
+        <strong><a href="user.html">John Doe</a></strong>
+        <small>Member</small>
+        <br>
+        <small class="btn-group btn-group-xs">
+        <a class="btn btn-default"><i class="fa fa-thumbs-o-up"></i></a>
+        <a class="btn btn-default"><i class="fa fa-thumbs-o-down"></i></a>
+        <strong class="btn btn-danger">-98</strong>
+        </small>
+      </div>
+      <div class="media-body">
+        <!-- Post Info Buttons -->
+        <div class="forum-post-panel btn-group btn-group-xs">
+          <a href="#" class="btn btn-default"><i class="fa fa-clock-o"></i> Posted 3 weeks ago</a>
+          <a href="#" class="btn btn-danger"><i class="fa fa-warning"></i> Report post</a>
+        </div>
+        <!-- Post Info Buttons END -->
+        <!-- Post Text -->
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit</b>. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
+        <p>Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. <b>Mauris massa</b>. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. </p>
+        <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. <i>Lorem ipsum dolor sit amet, consectetur adipiscing elit</i>. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. <b>Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa</b>. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. <b>Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis</b>. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. </p>
+        <!-- Post Text EMD -->
+      </div>
+    </li>
+    <!-- Forum Post END -->
+  </ul>
+</div>
+{% endcomment %}
+
+#forum listing chat
+{% comment %}<div class="row">
+  <div class="col-lg-8 col-sm-8 col-xs-12">
+    <h4 id="addComment">Leave a Comment:</h4>
+    <hr>
+    <ul class="media-list comments">
+      <li class="media">
+        <a class="pull-left" href="#">
+        <img class="media-object img-circle img-thumbnail" src="http://snipplicious.com/images/guest.png" width="64" alt="Generic placeholder image">
+        </a>
+        <div class="media-body">
+          <h5 class="media-heading pull-left">loneswan</h5>
+          <div class="comment-info pull-left">
+            <div class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Sent from ***0.0.1"><i class="fa fa-user"></i></div>
+            <div class="btn btn-primary btn-xs"><a class="fa fa-envelope white" href="mailto:loneswan@loneswan.net"></a></div>
+            <div class="btn btn-default btn-xs"><i class="fa fa-clock-o"></i> Posted 3 weeks ago</div>
+          </div>
+          <br class="clearfix">
+          <p class="well">This is really awesome snippet!</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>{% endcomment %}
+
+#user profile listing
+{% comment %}<div class="container">
+<div class="row">
+    <div class="col-md-10">
+   <div class="col-md-3">
+   <div class="panel widget">
+      <div style="background-image: url('http://lorempixel.com/400/400/fashion/6/')" class="panel-body text-center bg-center">
+         <div class="row row-table">
+            <div class="col-xs-12 text-white">
+               <img src="http://lorempixel.com/400/400/people/1" alt="Image" class="img-thumbnail img-circle thumb128">
+               <h3>Jane</h3>
+               <p>
+                  <em class="fa fa-twitter fa-fw"></em>janedoe</p>
+            </div>
+         </div>
+      </div>
+      <div class="panel-body text-center">
+         <div class="row row-table">
+            <div class="col-xs-4">
+               <a href="#" class="text-danger">
+                  <em class="fa fa-twitter fa-2x"></em>
+               </a>
+            </div>
+            <div class="col-xs-4">
+               <a href="#" class="text-danger">
+                  <em class="fa fa-facebook fa-2x"></em>
+               </a>
+            </div>
+            <div class="col-xs-4">
+               <a href="#" class="text-danger">
+                  <em class="fa fa-envelope-o fa-2x"></em>
+               </a>
+            </div>
+         </div>
+      </div>
+      <div class="list-group">
+         <a href="#" class="list-group-item">
+            <span class="label label-danger pull-right">17</span>
+            <em class="fa fa-fw fa-clock-o text-muted"></em>Recent Activity</a>
+         <a href="#" class="list-group-item">
+            <span class="label label-danger pull-right">1 254</span>
+            <em class="fa fa-fw fa-user text-muted"></em>Following</a>
+         <a href="#" class="list-group-item">
+            <span class="label label-danger pull-right">142</span>
+            <em class="fa fa-fw fa-folder-open-o text-muted"></em>Photos</a>
+      </div>
+   </div>
+   </div>
+
+
+
+     <div class="col-md-3">
+   <div class="panel widget">
+      <div style="background-image: url('http://lorempixel.com/400/400/fashion/8/')" class="panel-body text-center bg-center">
+         <div class="row row-table">
+            <div class="col-xs-12 text-white">
+               <img src="http://lorempixel.com/400/400/people/6" alt="Image" class="img-thumbnail img-circle thumb128">
+               <h3>Maria</h3>
+               <p>
+                  <em class="fa fa-twitter fa-fw"></em>janedoe</p>
+            </div>
+         </div>
+      </div>
+      <div class="panel-body text-center">
+         <div class="row row-table">
+            <div class="col-xs-4">
+               <a href="#" class="text-primary">
+                  <em class="fa fa-twitter fa-2x"></em>
+               </a>
+            </div>
+            <div class="col-xs-4">
+               <a href="#" class="text-primary">
+                  <em class="fa fa-facebook fa-2x"></em>
+               </a>
+            </div>
+            <div class="col-xs-4">
+               <a href="#" class="text-primary">
+                  <em class="fa fa-envelope-o fa-2x"></em>
+               </a>
+            </div>
+         </div>
+      </div>
+      <div class="list-group">
+         <a href="#" class="list-group-item">
+            <span class="label label-primary pull-right">1 451</span>
+            <em class="fa fa-fw fa-clock-o text-muted"></em>Recent Activity</a>
+         <a href="#" class="list-group-item">
+            <span class="label label-primary pull-right">254</span>
+            <em class="fa fa-fw fa-user text-muted"></em>Following</a>
+         <a href="#" class="list-group-item">
+            <span class="label label-primary pull-right">1 254</span>
+            <em class="fa fa-fw fa-folder-open-o text-muted"></em>Photos</a>
+      </div>
+   </div>
+   </div>
+   <div class="col-md-3">
+   <div class="panel widget">
+      <div style="background-image: url('http://lorempixel.com/400/400/fashion/9/')" class="panel-body text-center bg-center">
+         <div class="row row-table">
+            <div class="col-xs-12 text-white">
+               <img src="http://lorempixel.com/400/400/people/8" alt="Image" class="img-thumbnail img-circle thumb128">
+               <h3>Eva</h3>
+               <p>
+                  <em class="fa fa-twitter fa-fw"></em>janedoe</p>
+            </div>
+         </div>
+      </div>
+      <div class="panel-body text-center">
+         <div class="row row-table">
+            <div class="col-xs-4">
+               <a href="#" class="text-success">
+                  <em class="fa fa-twitter fa-2x"></em>
+               </a>
+            </div>
+            <div class="col-xs-4">
+               <a href="#" class="text-success">
+                  <em class="fa fa-facebook fa-2x"></em>
+               </a>
+            </div>
+            <div class="col-xs-4">
+               <a href="#" class="text-success">
+                  <em class="fa fa-envelope-o fa-2x"></em>
+               </a>
+            </div>
+         </div>
+      </div>
+      <div class="list-group">
+         <a href="#" class="list-group-item">
+            <span class="label label-success pull-right">27</span>
+            <em class="fa fa-fw fa-clock-o text-muted"></em>Recent Activity</a>
+         <a href="#" class="list-group-item">
+            <span class="label label-success pull-right">10</span>
+            <em class="fa fa-fw fa-user text-muted"></em>Following</a>
+         <a href="#" class="list-group-item">
+            <span class="label label-success pull-right">327</span>
+            <em class="fa fa-fw fa-folder-open-o text-muted"></em>Photos</a>
+      </div>
+   </div>
+   </div>
+   <div class="col-md-3">
+   <div class="panel widget">
+      <div style="background-image: url('http://lorempixel.com/400/400/fashion/6/')" class="panel-body text-center bg-center">
+         <div class="row row-table">
+            <div class="col-xs-12 text-white">
+               <img src="http://lorempixel.com/400/400/people" alt="Image" class="img-thumbnail img-circle thumb128">
+               <h3>Rosalie</h3>
+               <p>
+                  <em class="fa fa-twitter fa-fw"></em>janedoe</p>
+            </div>
+         </div>
+      </div>
+      <div class="panel-body text-center">
+         <div class="row row-table">
+            <div class="col-xs-4">
+               <a href="#" class="text-info">
+                  <em class="fa fa-twitter fa-2x"></em>
+               </a>
+            </div>
+            <div class="col-xs-4">
+               <a href="#" class="text-info">
+                  <em class="fa fa-facebook fa-2x"></em>
+               </a>
+            </div>
+            <div class="col-xs-4">
+               <a href="#" class="text-info">
+                  <em class="fa fa-envelope-o fa-2x"></em>
+               </a>
+            </div>
+         </div>
+      </div>
+      <div class="list-group">
+         <a href="#" class="list-group-item">
+            <span class="label label-info pull-right">719</span>
+            <em class="fa fa-fw fa-clock-o text-muted"></em>Recent Activity</a>
+         <a href="#" class="list-group-item">
+            <span class="label label-info pull-right">1 200</span>
+            <em class="fa fa-fw fa-user text-muted"></em>Following</a>
+         <a href="#" class="list-group-item">
+            <span class="label label-info pull-right">325</span>
+            <em class="fa fa-fw fa-folder-open-o text-muted"></em>Photos</a>
+      </div>
+   </div>
+   </div>
+</div>
+</div>
+</div>{% endcomment %}
+
+#comment with input
+{% comment %}<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          Comments
+        </div>
+        <div class="panel-body comments">
+          <textarea class="form-control" placeholder="Write your comment" rows="5"></textarea>
+          <br>
+          <a class="small pull-left" href="#">Login to you existing account</a>
+          <button type="button" class="btn btn-info pull-right">Submit comment</button>
+          <div class="clearfix"></div>
+          <hr>
+          <ul class="media-list">
+            <li class="media">
+              <div class="comment">
+                <a href="#" class="pull-left">
+                <img src="http://lorempixel.com/60/60/animals/?sf5saf" alt="" class="img-circle">
+                </a>
+                <div class="media-body">
+                  <strong class="text-success">Jane Doe</strong>
+                  <span class="text-muted">
+                  <small class="text-muted">6 days ago</small>
+                  </span>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Lorem ipsum dolor sit amet, <a href="#">#some link </a>.
+                  </p>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Pie Chart
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                    <a class="t-collapse fa fa-chevron-down" href="javascript:;"></a>
-                                    <a class="t-close fa fa-times" href="javascript:;"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <div id="pie-chart" class="pie-chart">
-                                    <div id="pie-chart-container" class="f-c-space">
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-
-                    <div class="col-md-6">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Donut pie
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                    <a class="t-collapse fa fa-chevron-down" href="javascript:;"></a>
-                                    <a class="t-close fa fa-times" href="javascript:;"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <div id="donut-chart" class="pie-chart">
-                                    <div id="donut-chart-container" class="f-c-space">
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Combine Statistics
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                    <a class="t-collapse fa fa-chevron-down" href="javascript:;"></a>
-                                    <a class="t-close fa fa-times" href="javascript:;"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <div id="combine-chart">
-                                    <div id="combine-chart-container" class="f-c-space">
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Multi Option Statistics
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                    <a class="t-collapse fa fa-chevron-down" href="javascript:;"></a>
-                                    <a class="t-close fa fa-times" href="javascript:;"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <div id="toggle-chart">
-                                    <div class="clearfix">
-                                        <form class="form-horizontal pull-left ">
-                                            <div class="control-group">
-                                                <label class="control-label">Chart Type :</label>
-                                                <div class="series-list">
-                                                    <label class="checkbox inline">
-                                                        <input id="chartType1" checked name="ct" type="radio" value="line" />Line Chart</label>
-                                                    <label class="checkbox inline">
-                                                        <input id="chartType2" name="ct" type="radio" value="bar" />Bar Chart</label>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <form class="form-horizontal pull-right">
-                                            <div class="control-group ">
-                                                <label class="control-label">Toggle series :</label>
-                                                <div class="series-list">
-                                                    <label class="checkbox inline">
-                                                        <input type="checkbox" id="cbdata1" checked>data One
-                                                    </label>
-                                                    <label class="checkbox inline">
-                                                        <input type="checkbox" id="cbdata2" checked>data Two</label>
-                                                    <label class="checkbox inline">
-                                                        <input type="checkbox" id="cbdata3" checked>data Three</label>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div id="legend-placeholder">
-                                    </div>
-                                    <div id="toggle-chart-container" class="f-c-space">
-                                    </div>
-                                </div>
-
-                            </div>
-                        </section>
-                    </div>
-
-                </div>
-
-            </div>{% endcomment %}
-
-{% comment %}    <div class="wrapper">
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Form validations
-                            </header>
-                            <div class="panel-body">
-                                <div class=" form">
-                                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
-                                        <div class="form-group ">
-                                            <label for="cname" class="control-label col-lg-2">Name (required)</label>
-                                            <div class="col-lg-10">
-                                                <input class=" form-control" id="cname" name="name" minlength="2" type="text" required />
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="cemail" class="control-label col-lg-2">E-Mail (required)</label>
-                                            <div class="col-lg-10">
-                                                <input class="form-control " id="cemail" type="email" name="email" required />
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="curl" class="control-label col-lg-2">URL (optional)</label>
-                                            <div class="col-lg-10">
-                                                <input class="form-control " id="curl" type="url" name="url" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="ccomment" class="control-label col-lg-2">Your Comment (required)</label>
-                                            <div class="col-lg-10">
-                                                <textarea class="form-control " id="ccomment" name="comment" required></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-offset-2 col-lg-10">
-                                                <button class="btn btn-success" type="submit">Save</button>
-                                                <button class="btn btn-default" type="button">Cancel</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </section>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Advanced Form validations
-                            </header>
-                            <div class="panel-body">
-                                <div class="form">
-                                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
-                                        <div class="form-group ">
-                                            <label for="firstname" class="control-label col-lg-2">Firstname *</label>
-                                            <div class="col-lg-10">
-                                                <input class=" form-control" id="firstname" name="firstname" type="text" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="lastname" class="control-label col-lg-2">Lastname  *</label>
-                                            <div class="col-lg-10">
-                                                <input class=" form-control" id="lastname" name="lastname" type="text" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="username" class="control-label col-lg-2">Username *</label>
-                                            <div class="col-lg-10">
-                                                <input class="form-control " id="username" name="username" type="text" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="password" class="control-label col-lg-2">Password *</label>
-                                            <div class="col-lg-10">
-                                                <input class="form-control " id="password" name="password" type="password" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="confirm_password" class="control-label col-lg-2">Confirm Password *</label>
-                                            <div class="col-lg-10">
-                                                <input class="form-control " id="confirm_password" name="confirm_password" type="password" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="email" class="control-label col-lg-2">Email *</label>
-                                            <div class="col-lg-10">
-                                                <input class="form-control " id="email" name="email" type="email" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="agree" class="control-label m-t-less-6 col-lg-2 col-sm-3">Agree to Our Policy *</label>
-                                            <div class="col-lg-10 col-sm-9 chk-fv">
-                                                <input  type="checkbox" style="width: 20px" class="checkbox form-control iCheck" id="agree" name="agree" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="newsletter" class="control-label m-t-less-6 col-lg-2 col-sm-3">Receive the Newsletter</label>
-                                            <div class="col-lg-10 col-sm-9 chk-fv">
-                                                <input  type="checkbox" style="width: 20px" class="checkbox form-control iCheck" id="newsletter" name="newsletter" />
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-lg-offset-2 col-lg-10">
-                                                <button class="btn btn-success" type="submit">Save</button>
-                                                <button class="btn btn-default" type="button">Cancel</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-
-            </div>{% endcomment %}
-
-
-   {% comment %} <div class="wrapper">
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Basic
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                    <a class="t-collapse fa fa-chevron-down" href="javascript:;"></a>
-                                    <a class="t-close fa fa-times" href="javascript:;"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <div id="gmap_basic" class="gmaps"></div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="col-lg-6">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Markers
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                    <a class="t-collapse fa fa-chevron-down" href="javascript:;"></a>
-                                    <a class="t-close fa fa-times" href="javascript:;"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <div id="gmap_marker" class="gmaps"></div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Geo location
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                    <a class="t-collapse fa fa-chevron-down" href="javascript:;"></a>
-                                    <a class="t-close fa fa-times" href="javascript:;"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <div id="gmap_geo" class="gmaps"></div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="col-lg-6">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Polylines
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                    <a class="t-collapse fa fa-chevron-down" href="javascript:;"></a>
-                                    <a class="t-close fa fa-times" href="javascript:;"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <div id="gmap_polylines" class="gmaps"></div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Geo coding
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                    <a class="t-collapse fa fa-chevron-down" href="javascript:;"></a>
-                                    <a class="t-close fa fa-times" href="javascript:;"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <form class="form-inline map-search" role="form">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-10">
-                                                <input type="text" id="gmap_geocoding_address" class="form-control" placeholder="Address..." />
-                                            </div>
-                                            <div class="col-md-2">
-                                                <input type="button" id="gmap_geocoding_btn" class="btn btn-primary" value="Search" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <br>
-                                <div id="gmap_geocoding" class="gmaps"></div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-
-            </div>{% endcomment %}
-
-
-     <form class="form-signin" id="signupForm" method="post" action="/registration/">{% csrf_token %}
-              <p>Enter your personal details below</p>
-
-              <input id="firstname" name="firstname" type="text" class="form-control" placeholder="Full Name" autofocus>
-              <input id="username" name="username" type="text" class="form-control" placeholder="Address" autofocus>
-              <input id="email" name="email" type="text" class="form-control" placeholder="Email" autofocus>
-              <input type="text" class="form-control" placeholder="City/Town" autofocus>
-              <div class="radio-custom radio-success">
-                  <input type="radio" value="yes" checked="checked" name="option-yes" id="male">
-                  <label for="male">Male</label>
-                  <input type="radio"  value="no" name="option-yes" id="female">
-                  <label for="female">Female</label>
+                <div class="clearfix"></div>
               </div>
+              <ul class="media-list">
+                <li class="media">
+                  <div class="comment">
+                    <a href="#" class="pull-left">
+                    <img src="http://lorempixel.com/60/60/animals/?Fsf6sf6" alt="" class="img-circle">
+                    </a>
+                    <div class="media-body">
+                      <strong class="text-success">MrAwesome</strong>
+                      <span class="text-muted">
+                      <small class="text-muted">2 days ago</small>
+                      </span>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Lorem ipsum dolor sit amet.
+                      </p>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </li>
+                <li class="media">
+                  <div class="comment">
+                    <a href="#" class="pull-left">
+                    <img src="http://lorempixel.com/60/60/animals/?Fsgdsg" alt="" class="img-circle">
+                    </a>
+                    <div class="media-body">
+                      <strong class="text-success">Miss Lucia</strong>
+                      <span class="text-muted">
+                      <small class="text-muted">15 minutes ago</small>
+                      </span>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Lorem ipsum dolor sit amet.
+                      </p>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li class="media">
+              <div class="comment">
+                <a href="#" class="pull-left">
+                <img src="http://lorempixel.com/60/60/animals/?qrwegsg" alt="" class="img-circle">
+                </a>
+                <div class="media-body">
+                  <strong class="text-success">Jana Cova</strong>
+                  <span class="text-muted">
+                  <small class="text-muted">12 days ago</small>
+                  </span>
+                  <span class="text-muted pull-right">
+                  <small class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Remove</small>
+                  </span>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Lorem ipsum dolor sit amet.
+                  </p>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </li>
+            <li class="media">
+              <div class="comment">
+                <a href="#" class="pull-left">
+                <img src="http://lorempixel.com/60/60/animals/?setrtss" alt="" class="img-circle">
+                </a>
+                <div class="media-body">
+                  <strong class="text-success">Johnatan Smarty</strong>
+                  <span class="text-muted">
+                  <small class="text-muted">1 month ago</small>
+                  </span>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
+                  </p>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>{% endcomment %}
 
-              <p> Enter your account details below</p>
-              <input type="text" class="form-control" placeholder="User Name" autofocus>
-              <input id="password" name="password" type="password" class="form-control" placeholder="Password">
-              <input id="confirm_password" name="confirm_password" type="password" class="form-control" placeholder="Re-type Password">
-              <label class="checkbox-custom check-success">
-                  <input type="checkbox" value="agree this condition" id="checkbox1"> <label for="checkbox1">I agree to the Terms of Service and Privacy Policy</label>
-              </label>
+#profile
+{% comment %}    <div class="container">
+  <h1 class="page-header">User management</h1>
+  <p class="lead">Click an user name to see more details.</p>
+  <div class="row">
+    <div id="users-management" class="col-md-8">
+      <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                href="#collapse-1"><img src="http://lorempixel.com/128/128/people/?1" class="img-circle">
+              John Doe <small>(johndoe)</small>
+              </a>
+              <div class="btn-group pull-right"><a href="#" class="btn btn-primary"><i class="fa fa-info"></i><span> Info</span></a><a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i><span> Edit</span></a><a href="#" class="btn btn-danger"><i class="fa fa-times"></i><span> Remove</span></a></div>
+            </h4>
+          </div>
+          <div id="collapse-1" class="panel-collapse collapse">
+            <div class="panel-body">
+              <img src="http://lorempixel.com/128/128/people/?1" class="pull-left img-circle">
+              <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
+                nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+                single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
+              </p>
+              <p>beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
+                lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
+                probably haven't heard of them accusamus labore sustainable VHS.
+              </p>
+            </div>
+            <div class="panel-footer">
+              <div class="btn-group btn-group-xs"><span class="btn">Actions: </span><a class="btn btn-success" href="#"><i class="fa fa-thumbs-up"></i> Add reputation</a> <a class="btn btn-danger" href="#"><i class="fa fa-thumbs-down"></i> Decrease reputation</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                href="#collapse-2"><img src="http://lorempixel.com/128/128/people/?2" class="img-circle">
+              Janeth Doe <small>(janedoe)</small>
+              </a>
+              <div class="btn-group pull-right"><a href="#" class="btn btn-primary"><i class="fa fa-info"></i><span> Info</span></a><a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i><span> Edit</span></a><a href="#" class="btn btn-danger"><i class="fa fa-times"></i><span> Remove</span></a></div>
+            </h4>
+          </div>
+          <div id="collapse-2" class="panel-collapse collapse">
+            <div class="panel-body">
+              <img src="http://lorempixel.com/128/128/people/?2" class="pull-left img-circle">
+              <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
+                nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+                single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
+              </p>
+              <p>beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
+                lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
+                probably haven't heard of them accusamus labore sustainable VHS.
+              </p>
+            </div>
+            <div class="panel-footer">
+              <div class="btn-group btn-group-xs"><span class="btn">Actions: </span><a class="btn btn-success" href="#"><i class="fa fa-thumbs-up"></i> Add reputation</a> <a class="btn btn-danger" href="#"><i class="fa fa-thumbs-down"></i> Decrease reputation</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                href="#collapse-3"><img src="http://lorempixel.com/128/128/people/?3" class="img-circle">
+              Michael Jackson <small>(mijacksn)</small>
+              </a>
+              <div class="btn-group pull-right"><a href="#" class="btn btn-primary"><i class="fa fa-info"></i><span> Info</span></a><a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i><span> Edit</span></a><a href="#" class="btn btn-danger"><i class="fa fa-times"></i><span> Remove</span></a></div>
+            </h4>
+          </div>
+          <div id="collapse-3" class="panel-collapse collapse">
+            <div class="panel-body">
+              <img src="http://lorempixel.com/128/128/people/?3" class="pull-left img-circle">
+              <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
+                nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+                single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
+              </p>
+              <p>beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
+                lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
+                probably haven't heard of them accusamus labore sustainable VHS.
+              </p>
+            </div>
+            <div class="panel-footer">
+              <div class="btn-group btn-group-xs"><span class="btn">Actions: </span><a class="btn btn-success" href="#"><i class="fa fa-thumbs-up"></i> Add reputation</a> <a class="btn btn-danger" href="#"><i class="fa fa-thumbs-down"></i> Decrease reputation</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                href="#collapse-4"><img src="http://lorempixel.com/128/128/people/?4" class="img-circle">
+              Alexis Foobar <small>(afoobar)</small>
+              </a>
+              <div class="btn-group pull-right"><a href="#" class="btn btn-primary"><i class="fa fa-info"></i><span> Info</span></a><a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i><span> Edit</span></a><a href="#" class="btn btn-danger"><i class="fa fa-times"></i><span> Remove</span></a></div>
+            </h4>
+          </div>
+          <div id="collapse-4" class="panel-collapse collapse">
+            <div class="panel-body">
+              <img src="http://lorempixel.com/128/128/people/?4" class="pull-left img-circle">
+              <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
+                nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+                single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
+              </p>
+              <p>beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
+                lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
+                probably haven't heard of them accusamus labore sustainable VHS.
+              </p>
+            </div>
+            <div class="panel-footer">
+              <div class="btn-group btn-group-xs"><span class="btn">Actions: </span><a class="btn btn-success" href="#"><i class="fa fa-thumbs-up"></i> Add reputation</a> <a class="btn btn-danger" href="#"><i class="fa fa-thumbs-down"></i> Decrease reputation</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                href="#collapse-5"><img src="http://lorempixel.com/128/128/people/?5" class="img-circle">
+              John Doe <small>(johndoe)</small>
+              </a>
+              <div class="btn-group pull-right"><a href="#" class="btn btn-primary"><i class="fa fa-info"></i><span> Info</span></a><a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i><span> Edit</span></a><a href="#" class="btn btn-danger"><i class="fa fa-times"></i><span> Remove</span></a></div>
+            </h4>
+          </div>
+          <div id="collapse-5" class="panel-collapse collapse">
+            <div class="panel-body">
+              <img src="http://lorempixel.com/128/128/people/?5" class="pull-left img-circle">
+              <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
+                nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+                single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
+              </p>
+              <p>beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
+                lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
+                probably haven't heard of them accusamus labore sustainable VHS.
+              </p>
+            </div>
+            <div class="panel-footer">
+              <div class="btn-group btn-group-xs"><span class="btn">Actions: </span><a class="btn btn-success" href="#"><i class="fa fa-thumbs-up"></i> Add reputation</a> <a class="btn btn-danger" href="#"><i class="fa fa-thumbs-down"></i> Decrease reputation</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>{% endcomment %}
+#calander show
+{% comment %}
+    <div class="container">
+  <h2>Basic Table</h2>
+  <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>DateTime</th>
+        <th>Publich</th>
+          <th>Weekend</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in date %}
+      <tr>
+        <td>{{ item.calanderid }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.ph}}</td>
+        <td>{{ item.weekend}}</td>
+      </tr>
+
+    {% endfor%}
+      </tr>
+    </tbody>
+  </table>
+</div>{% endcomment %}
 
 
+{% comment %}<script src={% static "https://code.highcharts.com/highcharts.js"%}></script>
+<script src={% static "https://code.highcharts.com/modules/exporting.js"%}></script>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>{% endcomment %}
 
-    <!--Sparkline Chart-->
-<script src="{% static "js/sparkline/jquery.sparkline.js"%}"></script>
-<script src="{% static "js/sparkline/sparkline-init.js"%}"></script>
-
-
-<!--flot chart -->
-<script src="{% static "js/flot-chart/jquery.flot.js"%}"></script>
-<script src="{% static "js/flot-chart/jquery.flot.resize.js"%}"></script>
-<script src="{% static "js/flot-chart/jquery.flot.tooltip.min.js"%}"></script>
-<script src="{% static "js/flot-chart/jquery.flot.pie.js"%}"></script>
-<script src="{% static "js/flot-chart/jquery.flot.selection.js"%}"></script>
-<script src="{% static "js/flot-chart/jquery.flot.stack.js"%}"></script>
-<script src="{% static "js/flot-chart/jquery.flot.crosshair.js"%}"></script>
-
-    <script src="{% static "js/flot-chart-init.js"%}"></script>
-    <script src="{% static "js/scripts.js"%}"></script>
+    {{ text }}++++{{ textM }}++++{{ textT }}
+    <div class="progress">
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+  aria-valuemin="0" aria-valuemax="100" style="width:{{ text }}%">
+    40% Complete (success)
+  </div>
+</div>
 {% endblock %}
+
 

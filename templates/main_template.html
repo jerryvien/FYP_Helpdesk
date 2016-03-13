@@ -32,7 +32,18 @@
     <link href="{% static "js/data-table/css/dataTables.scroller.css"%}" rel="stylesheet">
 
         <!--bootstrap-wysihtml5-->
-    <link rel="stylesheet" type="text/css" href="{% static "js/bootstrap-wysihtml5/bootstrap-wysihtml5.css"%}" />
+    <link rel="stylesheet" type="text/css" href={% static "js/bootstrap-wysihtml5/bootstrap-wysihtml5.css" %}/>
+
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href={% static "http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"%} rel="stylesheet">
+    <script src={% static "http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"%}></script>
+    <script src={% static "http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"%}></script>
+
+    <!-- include summernote css/js-->
+    <link href={% static "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css"%} rel="stylesheet">
+    <script src={% static "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"%}></script>
+    <!--  summernote -->
+    <link href={% static "js/summernote/dist/summernote.css"%} rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -67,7 +78,7 @@
                         <h3 class="navigation-title">Helpdesk</h3>
                     </li>
                     <li><a href="/dashboard/"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
-                  <li class="menu-list"><a href=""><i class="fa fa-ticket"></i> <span>Tickets <span class="badge noti-arrow bg-success pull-right"></span> </span></a>
+                  <li class="menu-list"><a href=""><i class="fa fa-ticket"></i> <span>Tickets <span class="badge noti-arrow bg-success pull-right"></span></span></a>
                         <ul class="child-list">
                             <li><a href="/create_ticket/"> Create New Ticket</a></li>
                             <li><a href="/ticket_directory/"> Search Ticket</a></li>
@@ -81,7 +92,13 @@
                             <li><a href="calendar.html"> Organizations</a></li>
                         </ul>
                     </li>
+                     <li class="menu-list"><a href=""><i class="fa fa-calendar"></i> <span>Leave <span class="badge noti-arrow bg-success pull-right"></span> </span></a>
+                        <ul class="child-list">
+                            <li><a href="/leave_list/" > Leave List </a></li>
 
+                            <li><a href="/calander/"> Leave Calander</a></li>
+                        </ul>
+                    </li>
 
                     <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>Tasks</span></a>
                         <ul class="child-list">
@@ -123,11 +140,11 @@
                     <h4>Server Status</h4>
                     <ul class="list-group">
                         <li>
-                            <span class="label label-danger pull-right">33%</span>
+                            <span class="label label-danger pull-right">90%</span>
                             <p>CPU Used</p>
                             <div class="progress progress-xs">
                                 <div class="progress-bar progress-bar-danger" style="width: 33%;">
-                                    <span class="sr-only">33%</span>
+                                    <span class="sr-only">90%</span>
                                 </div>
                             </div>
                         </li>
@@ -472,9 +489,11 @@
             <!-- page head end-->
 
             <div id="content">
+
                     {% block content %}
 
                     {% endblock %}
+
             </div>
 
 
@@ -536,6 +555,16 @@
 <script type="text/javascript" src="{% static "http://maps.google.com/maps/api/js?sensor=true"%}"></script>
 <script src="{% static "js/gmaps.js"%}"></script>
 <script src="{% static "js/site.js" %}"></script>
+<script src={% static "js/dragging-calendar-event-init.js"%}></script>
+<script src={% static "js/fullcalendar/fullcalendar.min.js"%}></script>
+<link href="{% static "js/fullcalendar/bootstrap-fullcalendar.css"%}" rel="stylesheet">
+
+    <!--bootstrap-wysihtml5-->
+<script type="text/javascript" src={% static "js/bootstrap-wysihtml5/wysihtml5-0.3.0.js"%}></script>
+<script type="text/javascript" src={% static "js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"%}></script>
+
+<!--summernote-->
+<script src={% static "js/summernote/dist/summernote.min.js" %}></script>
 
 </body>
 </html>

@@ -1,0 +1,12 @@
+{{title}}
+
+The leave {{leaveId}} has been Approved.
+
+Time : {{current_datetime}}
+Leave Type: {{ticket_subject}}
+Reason : {{reason}}
+Approved By : {{approver}}
+
+Ticket details: {{ticket_link}}
+
+Email sent datetime : {{current_datetime}}

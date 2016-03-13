@@ -1,5 +1,7 @@
 {% extends "main_template.html" %}
+
 {% load humanize %}
+
 {% block content %}
 
     <div class="row">
@@ -79,5 +81,86 @@
         </div>
 
     </div>
+
+
+
+    <div class="home-list">
+<div style="display:block; margin: 0" class="head" id="myHeader"><div class="fleft">Tickets by time left</div><div class="fright"><a href="javascript:changeHomePageView('All')" class="btn-white">Show all</a>
+<a href="javascript:changeHomePageView('refresh')" class="btn-white" id="toggleReq">Refresh</a></div><div class="clboth"></div></div><div style="display:none; margin: 0" class="head" id="allHeader"><div class="fleft">Tickets by time left</div><div class="fright"><a href="javascript:changeHomePageView('myself')" class="btn-white">Show mine</a>
+<a href="javascript:changeHomePageView('refresh')" class="btn-white" id="toggleReq">Refresh</a></div><div class="clboth"></div></div>
+<div id="idForCasesCV">
+
+<form style="_margin-top:0px;" name="home_Cases">
+<input type="hidden" id="availableClosedStatusMappingVal" value="Closed">
+<input type="hidden" id="availableOpenStatusMappingVal" value="Open,On Hold,Escalated">
+<div id="changePanel">
+
+
+<table valign="top" width="100%" border="0" cellspacing="0" cellpadding="0" class="f11 bdrbtm ptb10lr5 " onmouseover="dropRofn(this,125867000000063070,'f11 bdrbtm ptb10lr5  hover');" onmouseout="dropRoutfn(this,'125867000000063070','f11 bdrbtm ptb10lr5 ')" id="table_125867000000063070" name="table_125867000000063070">
+<tbody><tr><td style="width:45px; _width:35px;" align="left" valign="top"> <input id="caseDesc_125867000000063070" value="" type="hidden">
+
+
+
+<i class="normaluser1 mr5 i-tag" title="Free User"></i>
+
+
+<i class="i-tag notesadd" id="notes_125867000000063070" onclick="getComments('125867000000063070','Cases')" style="margin-bottom: -1px;"></i> </td><td class="pb10ie" align="left" valign="top"> <div><a class="bld f12 link" href="ShowHomePage.do#Cases/dv/a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e">  <!-- NO OUTPUTENCODING -->
+<span style="font-weight:normal;">101</span><span> Welcome to Zoho Support. You've got a sample Ticket!</span>
+</a></div><div><span style="float: right; width: 30px;_width:20px; margin-top: 0px;"><i class="i-tag email" name="threadStatusClass_125867000000063070" title="Email" id="threadStatusClass_125867000000063070"></i> </span></div><div class="f9 mt2 fright" style="margin-right:10px;">
+
+
+<span id="ownerContainer_a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e" class="link2 f9" style="border:0px;margin-right: 13px; cursor:pointer; "> <!-- NO OUTPUTENCODING -->
+<a href="javascript:;" class="innergrey f11">jerry yee</a> </span>
+</div><div class="f9 mt2 "><i id="threadIcon_125867000000063070" class="threaddownarrow mb1 mr7 ml2 i-tag" onclick="showThreads('125867000000063070',this,false,'a6d88156e0ab28dd4004edfcbc7438de0ad7e16f5bb4b7e7')"></i> <!-- NO OUTPUTENCODING -->
+<span class="innergrey"> from </span><a href="ShowHomePage.do#Contacts/dv/a6d88156e0ab28dd4004edfcbc7438ded9b2774dda08f724" class="innergrey">Lawrence</a> <!-- NO OUTPUTENCODING -->
+&nbsp;|&nbsp;<span> <a href="ShowHomePage.do#Accounts/dv/a6d88156e0ab28dd4004edfcbc7438de86dc2d3c55edad4f" class="innergrey f11">Zoho</a> <!-- NO OUTPUTENCODING --> </span>
+<span class="f9 innergrey">13 minutes ago</span> <!-- displaying thread count starts-->
+
+<!-- displaying thread count ends-->
+<span style="margin-left: 10px; visibility: hidden;" id="div125867000000063070"> <a href="ShowHomePage.do#Cases/edit/a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e"> <!-- NO OUTPUTENCODING -->
+<i class="editIcon i-tag"></i></a>
+<i class="DelIcon i-tag" onclick="Callonclickofbutton2('/support/jditdesk/DeleteFromCV.do?isSupRepHome=true&amp;currentModule=Cases','Cases','a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e','Today + Overdue','125867000000007547','1','1','10');return false;"></i> <!-- NO OUTPUTENCODING -->
+<i class="popup i-tag" onclick="window.open('ShowHomePage.do#Cases/dv/a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e')"></i> <!-- NO OUTPUTENCODING --> </span></div></td>
+<td align="left" valign="bottom" width="17%">
+
+
+
+<div class="lightgray">Open</div>
+
+<div>
+
+
+
+
+<span class="f11 orangetxt"> due on 03/13/2016 10:09 PM<!-- NO OUTPUTENCODING --> </span>
+
+</div></td></tr></tbody></table><div id="listViewThreads_125867000000063070" style="margin-left:0px;margin-top:-4px;display:none;border-top:1px solid #eeeeee;">
+<div class="header_curve_cnt3" style="_width:99%;"><div class="header_curve3"><div class="header_content3 color3" style="_width:98.6%;"><p style="padding-left:7px;" id="listViewThreads_result_125867000000063070"></p></div><b class="hBox3">
+<b class="hb34 color3"></b><b class="hb33 color3"></b><b class="hb32 color3"></b><b class="hb31"></b>
+</b></div></div></div><div id="comments_container_125867000000063070"><div style="margin-left:80px; margin-bottom:3px; display:none;  width:70%;" id="Comments_125867000000063070"></div></div><input type="hidden" name="caseSubject_125867000000063070" id="caseSubject_125867000000063070" value=" [##101##] Welcome to Zoho Support. You've got a sample Ticket!">
+<input type="hidden" name="caseEmail_125867000000063070" id="caseEmail_125867000000063070" value="support@zohosupport.com">
+<input type="hidden" name="contactName_125867000000063070" id="contactName_125867000000063070" value="Lawrence">
+<input type="hidden" name="createdTime_125867000000063070" id="createdTime_125867000000063070" value="03/11/2016 10:09 PM">
+<input type="hidden" name="createdTimeMillisInGMT_125867000000063070" id="createdTimeMillisInGMT_125867000000063070" value="1457734184095">
+<input type="hidden" name="threadStatus_125867000000063070" id="threadStatus_125867000000063070" value="0">
+<input type="hidden" id="ownerId_a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e" value="a6d88156e0ab28dd4004edfcbc7438de0ad7e16f5bb4b7e7">
+<input type="hidden" name="isCommented_125867000000063070" id="isCommented_125867000000063070" value="false">
+<input type="hidden" id="authtoken_125867000000063070" value="a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e"><!-- NO OUTPUTENCODING -->
+
+
+
+<input name="fromIndex" id="fromIndex" type="hidden" value="1" maxlength="3"><input name="toIndex" id="toIndex" type="hidden" value="1" maxlength="3"><input name="module" id="module" type="hidden" value="Cases">
+
+<component:record totalrecords="-1" fromindex="1" toindex="1" optionslist="list" forwardto="/ShowSelectedCustomView.do?mod=true&amp;module=Cases&amp;cvid=125867000000007547&amp;isload=false&amp;currentModule=Cases&amp;display_cust_view_name=Today+Overdue&amp;loadType=left&amp;isShowCvDetails=true&amp;isSupRepHome=true&amp;userOption=myself"> <!-- NO OUTPUTENCODING -->
+
+<input type="hidden" name="currentOption" id="currentOption" value="10"><input type="hidden" name="rangeValue" id="rangeValue" value="10"><input type="hidden" name="defaultCV" id="defaultCV" value="10"><input type="hidden" name="fileName" value="/ShowSelectedCustomView.do?mod=true&amp;module=Cases&amp;cvid=125867000000007547&amp;isload=false&amp;currentModule=Cases&amp;display_cust_view_name=Today+Overdue&amp;loadType=left&amp;isShowCvDetails=true&amp;isSupRepHome=true&amp;userOption=myself"><!-- NO OUTPUTENCODING -->
+<input type="hidden" name="cvid" value="125867000000007547"><input type="hidden" name="totalRecords" value="-1"><input type="hidden" name="isSupRepHome" id="isSupRepHome" value="true"></component:record>
+
+
+
+
+
+<div style="display:none;" id="dummyOne"></div><input type="hidden" name="dummyOneCount" value="0"><input type="hidden" name="userOption" value="myself"><!-- NO OUTPUTENCODING -->
+<input type="hidden" name="recordCounts" value="1"><!-- NO OUTPUTENCODING --></div></form></div></div>
 
 {% endblock %}

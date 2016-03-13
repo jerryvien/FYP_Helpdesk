@@ -41,8 +41,14 @@ urlpatterns = [
     url(r'^user_profile/(?P<key>.+)/', 'HelpdekApp.views.user_profile', name='User Profile'),
     url(r'^base/', 'HelpdekApp.views.blank', name='base'),
     url(r'^resetPassword/', 'HelpdekApp.views.forget_password', name='resetPassword'),
+    url(r'^leave_application/', 'HelpdekApp.views.leave_application', name='LeaveApply'),
+    url(r'^calander/', 'HelpdekApp.views.calander', name='calander'),
+    url(r'^leave_list/', 'HelpdekApp.views.leave_list', name='LeaveList'),
+    url(r'^get_calender/', 'HelpdekApp.views.get_calender', name='LeaveList'),
+    url(r'^get_leave_calender/', 'HelpdekApp.views.get_leave_calender', name='LeaveList'),
     #--this
     url(r'^set_superuser_ajax/', 'HelpdekApp.views.set_superuser_ajax', name='Set SuperUser ajax'),
+    url(r'^set_leave_ajax/', 'HelpdekApp.views.set_leave_ajax', name='Set Leave ajax'),
     #--url(r'^edit_profile_ajax/', 'HelpdekApp.views.edit_profile_ajax', name='base'),
 
 ]

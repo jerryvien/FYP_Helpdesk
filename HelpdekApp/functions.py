@@ -104,6 +104,10 @@ def random_ticket():
     ticket_id = get_random_string(length=10)
     return ticket_id
 
+def random_leaveid():
+    leave_id = get_random_string()
+    return leave_id
+
 def SendEmail(user,random_ticket_id,subject,description):
     email_path = main_key.EMAIL_PATH
     email_subject = "Ticket "+ random_ticket_id +" successfully created."
@@ -118,6 +122,26 @@ def SendEmail(user,random_ticket_id,subject,description):
     message = t.render(c)
     try:
         send_mail(email_subject, message, email_sender, [user.email],fail_silently=False)
+        return True
+    except BadHeaderError:
+        return False
+
+def SendEmailleave(userC,user,leaveId,typeLeave,reason):
+    email_path = main_key.LEAVE_EMAIL_PATH
+    email_subject = "Leave "+ leaveId +" successfully approved."
+    email_sender = main_key.HELPDESK_TITLE + '<no-reply@'+main_key.HELPDESK_TITLE+'.com>'
+    link = 'http://127.0.0.1:9002/user_ticket_details/'+leaveId
+    c=Context({'ticket_link': link,
+               'reason': reason,
+               'approver': user.username,
+               main_key.CURRENT_DATE_TIME: datetime.datetime.now(),
+               'ticket_subject': typeLeave})
+    f = open(settings.MEDIA_ROOT + email_path, 'r')
+    t = Template(f.read()) # read txt file
+    f.close()
+    message = t.render(c)
+    try:
+        send_mail(email_subject, message, email_sender, [userC.email],fail_silently=False)
         return True
     except BadHeaderError:
         return False

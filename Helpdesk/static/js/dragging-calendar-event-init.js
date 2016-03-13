@@ -24,93 +24,76 @@ var Script = function () {
 
     });
 
-
     /* initialize the calendar
      -----------------------------------------------------------------*/
+    getCalender();
+}();
 
+function getCalender(){
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
-
-    $('#calendar').fullCalendar({
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,basicWeek,basicDay'
-        },
-        editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar !!!
-        drop: function(date, allDay) { // this function is called when something is dropped
-
-            // retrieve the dropped element's stored Event Object
-            var originalEventObject = $(this).data('eventObject');
-
-            // we need to copy it, so that multiple events don't have a reference to the same object
-            var copiedEventObject = $.extend({}, originalEventObject);
-
-            // assign it the date that was reported
-            copiedEventObject.start = date;
-            copiedEventObject.allDay = allDay;
-
-            // render the event on the calendar
-            // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-            $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-            // is the "remove after drop" checkbox checked?
-            if ($('#drop-remove').is(':checked')) {
-                // if so, remove the element from the "Draggable Events" list
-                $(this).remove();
-            }
-
-        },
-        events: [
-            {
-                title: 'All Day Event',
-                start: new Date(y, m, 1)
-            },
-            {
-                title: 'Long Event',
-                start: new Date(y, m, d-5),
-                end: new Date(y, m, d-2)
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d-3, 16, 0),
-                allDay: false
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d+4, 16, 0),
-                allDay: false
-            },
-            {
-                title: 'Meeting',
-                start: new Date(y, m, d, 10, 30),
-                allDay: false
-            },
-            {
-                title: 'Lunch',
-                start: new Date(y, m, d, 12, 0),
-                end: new Date(y, m, d, 14, 0),
-                allDay: false
-            },
-            {
-                title: 'Birthday Party',
-                start: new Date(y, m, d+1, 19, 0),
-                end: new Date(y, m, d+1, 22, 30),
-                allDay: false
-            },
-            {
-                title: 'Click for Google',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
-                url: 'http://google.com/'
-            }
-        ]
-    });
+    var tests =""
+    var titles =""
+    var a = [];
+    var b = [];
+    $.ajax({
+         type: 'GET',
+         url: '/get_leave_calender/',
+         dataType: 'json',
+         success: function (json) {
+             for (i = 0; i < json.length; i++){
+                 a[i] = {
+                     title: json[i].test,
+                     start: new Date(y, m, json[i].date)
+                 }
+             }
+             $('#leavecalendar').fullCalendar({
+                events: a
+             });
+         },
+         error: function () {
+             UnknownErrorPopup();
+         }
+     });
+    $.ajax({
+         type: 'GET',
+         url: '/get_calender/',
+         dataType: 'json',
+         success: function (json) {
+             for (i = 0; i < json.length; i++){
+                 tests = "http://127.0.0.1:9002/ticket_details/"+json[i].ticketNo
+                 if ((json[i].hour <= 11))
+                    if(json[i].minute >= 10)
+                        titles = json[i].hour+":"+json[i].minute+" AM "+json[i].subject
+                    if(json[i].minute <= 9)
+                        titles = json[i].hour+":0"+json[i].minute+" AM "+json[i].subject
+                 if ((json[i].hour >= 12))
+                    if(json[i].minute >= 10)
+                        titles = json[i].hour+":"+json[i].minute+" PM "+json[i].subject
+                    if(json[i].minute <= 9)
+                        titles = json[i].hour+":0"+json[i].minute+" PM "+json[i].subject
+                 b[i] = {
+                     title: titles,
+                     start: new Date(y,json[i].month-1, json[i].date,json[i].hour,json[i].minute),
+                     url: tests
+                 }
+             }
+             $('#ticketcalendar').fullCalendar({
+                 header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                    },
+                 editable: true,
+                events: b
+             });
+         },
+         error: function () {
+             UnknownErrorPopup();
+         }
+     });
 
 
-}();
+}

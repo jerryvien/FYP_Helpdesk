@@ -5,6 +5,7 @@
 <script src="{% static "https://code.highcharts.com/modules/exporting.js"%}"></script>
 {% block content %}
 
+{% comment %}
     <div class="container">
   <h2>Basic Table</h2>
   <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
@@ -136,10 +137,20 @@
 				                    </div>
 				                </div>
 				                </div>
+{% endcomment %}
+
+    <aside class="col-lg-8">
+    <div>
+        <section class="panel">
+            <div class="panel-body">
+                <div id="ticketcalendar" class="has-toolbar"></div>
+            </div>
+        </section>
+    </div>
+    </aside>
 
 
 
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 {% endblock %}

@@ -1,6 +1,9 @@
 {% extends "main_template.html" %}
 {% load humanize %}
+{% load static from staticfiles %}
+
 {% block content %}
+    <link href="{% static "css/custom.css" %}" rel="stylesheet">
     {% comment %}<div class="container">
   <h2>User Directory</h2>
   <table class="table table-hover">
@@ -28,13 +31,25 @@
     </tbody>
   </table>
 </div>{% endcomment %}
+    <aside class="col-lg-12">
     <div class="row">
                     <div class="col-sm-12">
                         <section class="panel">
                             <header class="panel-heading ">
-                                <span class="tools pull-right">
-                                    <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
-                                </span>
+                                <div class="row">
+				                    <div class="col-md-3">
+				                    	<div class="count-label">Pending Ticket</div>
+                                        <a class="count-value" id="cvcount_125867000000007547" href="ShowHomePage.do#Cases/lv/125867000000007547" data-count="{{ ticketOpen }}">{{ ticketOpen }}</a>
+				                    </div>
+				                    <div class="col-md-3">
+				                    	<div class="count-label">Pending Ticket for you</div>
+                                        <a class="count-value" id="cvcount_125867000000007547" href="ShowHomePage.do#Cases/lv/125867000000007547" data-count="1">{{ ticketPending }}</a>
+				                    </div>
+				                    <div class="col-md-3">
+				                    	<div class="count-label">Average Response Time</div>
+                                        <a class="count-value" id="cvcount_125867000000007547" href="ShowHomePage.do#Cases/lv/125867000000007547" data-count="1">{{ ticketClose }}</a>
+				                    </div>
+                                    </div>
                             </header>
                             <table class="table colvis-data-table data-table">
                             <thead>
@@ -42,6 +57,7 @@
                                 <th>Ticket ID</th>
                                 <th>Subject</th>
                                 <th>Created Time</th>
+                                <th>Overdue Date</th>
                                 <th>Request Type</th>
                                 <th>Status</th>
                                 <th>Urgency</th>
@@ -56,6 +72,7 @@
                                         <td><a href="/ticket_details/{{ item2.ticket_number}}" value="">{{ item2.ticket_number}}</a></td>
                                         <td> {{ item2.subject }}</td>
                                         <td>{{ item2.created_date_time }}</td>
+                                        <td>{{ item2.targeted_resolved_date|naturalday }}</td>
                                         <td>{{ item2.request_type}}</td>
                                         <td>{{ item2.status }}</td>
                                         {% if item2.urgency == 'High'%}
@@ -77,6 +94,120 @@
                         </section>
                     </div>
     </div>
+    </aside>
+    <div style="text-align: center;" id="body_layer"></div>
+    <div class="container-fluid" >
+
+	<div class="row" style="background-color: #ffffff;">
+		<div class="col-md-9" >
+			<h3>
+				<span>Welcome</span> <span id="userFull" class="clr333"><span id="usernametext">jerry yee</span></span><span id="spanat">at <span class="clr333" id="companynametext"> J&amp;D IT</span></span>
+			</h3>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="count-label">Pending Ticket</div>
+                    <a class="count-value" id="cvcount_125867000000007547" href="ShowHomePage.do#Cases/lv/125867000000007547" data-count="1">01</a>
+				</div>
+				<div class="col-md-3">
+					<div class="count-label">Pending Ticket for you</div>
+                    <a class="count-value" id="cvcount_125867000000007547" href="ShowHomePage.do#Cases/lv/125867000000007547" data-count="1">01</a>
+				</div>
+				<div class="col-md-3">
+					<div class="count-label">Average Response Time</div>
+                    <a class="count-value" id="cvcount_125867000000007547" href="ShowHomePage.do#Cases/lv/125867000000007547" data-count="1">01</a>
+				</div>
+            </div>
+            <div class="home-list">
+            <div style="display:block; margin: 0" class="head" id="myHeader"><div class="fleft">Tickets by time left</div></div>
+                {% for item in userR %}
+                                {% for item2 in item.ticket %}
+                <table valign="top" width="100%" border="0" cellspacing="0" cellpadding="0" class="">
+                    <tbody>
+                        <tr>
+                            <td class="pb10ie" align="left" valign="top">
+                                <div>
+                                    <a class="bld f12 link" href="ShowHomePage.do#Cases/dv/a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e">
+                                        <span style="font-weight:normal;">{{ item2.ticket_number }}</span><span>{{ item2.subject }}</span>
+                                    </a>
+                                </div>
+                                <div>
+                                    <span style="float: right; width: 30px;_width:20px; margin-top: 0px;">
+                                        <i class="i-tag email" name="threadStatusClass_125867000000063070" title="Email" id="threadStatusClass_125867000000063070"></i>
+                                    </span>
+                                </div>
+                                <div class="f9 mt2 fright" style="margin-right:10px;">
+                                    <span id="ownerContainer_a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e" class="link2 f9" style="border:0px;margin-right: 13px; cursor:pointer; "> <!-- NO OUTPUTENCODING -->
+                                    <a href="javascript:;" class="innergrey f11">jerry yee</a> </span>
+                                </div>
+                                <div class="f9 mt2 "><i id="threadIcon_125867000000063070" class="threaddownarrow mb1 mr7 ml2 i-tag" onclick="showThreads('125867000000063070',this,false,'a6d88156e0ab28dd4004edfcbc7438de0ad7e16f5bb4b7e7')"></i> <!-- NO OUTPUTENCODING -->
+                                    <span class="innergrey"> from </span><a href="ShowHomePage.do#Contacts/dv/a6d88156e0ab28dd4004edfcbc7438ded9b2774dda08f724" class="innergrey">{{ item2.user.username }}</a> <!-- NO OUTPUTENCODING -->
+                                        &nbsp;|&nbsp;<span> <a href="ShowHomePage.do#Accounts/dv/a6d88156e0ab28dd4004edfcbc7438de86dc2d3c55edad4f" class="innergrey f11">{{ item2.user.team }}</a> <!-- NO OUTPUTENCODING --> </span>
+                                    <span class="f9 innergrey">{{ item2.last_change_date| naturaltime }}</span> <!-- displaying thread count starts-->
+
+                                    <!-- displaying thread count ends-->
+                                    <span style="margin-left: 10px; visibility: hidden;" id="div125867000000063070"> <a href="ShowHomePage.do#Cases/edit/a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e"> <!-- NO OUTPUTENCODING -->
+                                    <i class="editIcon i-tag"></i></a>
+                                    <i class="DelIcon i-tag" onclick="Callonclickofbutton2('/support/jditdesk/DeleteFromCV.do?isSupRepHome=true&amp;currentModule=Cases','Cases','a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e','Today + Overdue','125867000000007547','1','1','10');return false;"></i> <!-- NO OUTPUTENCODING -->
+                                    <i class="popup i-tag" onclick="window.open('ShowHomePage.do#Cases/dv/a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e')"></i> <!-- NO OUTPUTENCODING --> </span>
+                                </div>
+                            </td>
+                            <td align="left" valign="bottom" width="17%">
+                                <div class="lightgray">Open</div>
+                                <div>
+                                    <span class="f11 orangetxt"> due tomorrow 10:09 PM<!-- NO OUTPUTENCODING --> </span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endfor %}
+            {% endfor %}
+
+			{% comment %}<div class="row">
+                {% for item in userR %}
+                    {% for item2 in item.ticket %}
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-2">
+                             <a class="bld f12 link" href="ShowHomePage.do#Cases/dv/a6d88156e0ab28dd4004edfcbc7438dec1bad278ec1e283e">
+                            <span style="...">{{ item2.subject }}</span>
+                             </a>
+						</div>
+						<div class="col-md-7">
+
+						</div>
+						<div class="col-md-3">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1">
+						</div>
+						<div class="col-md-1">
+						</div>
+						<div class="col-md-7">
+
+						</div>
+						<div class="col-md-1">
+						</div>
+						<div class="col-md-1">
+						</div>
+						<div class="col-md-1">
+						</div>
+					</div>
+				</div>
+                {% endfor %}
+            {% endfor %}
+			</div>{% endcomment %}
+		    </div>
+        </div>
+
+		<div class="col-md-3">
+            bla bla
+		</div>
+	</div>
+</div>
+
 
 
 {% endblock %}
+

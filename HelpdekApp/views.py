@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.template import Context, loader
 from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth import logout
 from forms import *
 from functions import *
@@ -15,6 +15,7 @@ import json
 import operator
 from django.http import *
 from django.shortcuts import  *
+from datetime import datetime
 import datetime
 import time
 def index(request):
@@ -42,6 +43,17 @@ def index(request):
         'user': user
     }
     return render(request, 'index.html', context)
+
+def calander(request):
+    session = request.session
+    title = "Calander"
+    user = CustomUser.objects.get(username=session['login_user'])
+
+    context = {
+        main_key.TEMPLATE_TITLE: title,
+        'user': user
+    }
+    return render(request, 'calander.html', context)
 
 def logout_view(request):
     session = request.session
@@ -168,14 +180,78 @@ def blank(request):
         main_key.TEMPLATE_TITLE: title,
     }
     return render(request, 'main_template.html', context)
-
+import random
+import re
 def test(request):
 
     title = main_key.DASHBOARD_TITLE
 
+    calander = Calendar()
+    T = Calendar.objects.all()
+    date = datetime.datetime(2016,1,1)
+    counter = 1
+    for i in range(1):
+        #builder = TextDic()
+        #builder.text = "Blacklist"
+        #builder.requestType = "Repair"
+        #builder.save()
+        counter += 1
+        date += datetime.timedelta(days=1)
+        calander = Calendar()
+        calander.calanderid = str(counter)
+        date_str = "2008-11-10 17:53:59"
+        dt_obj = datetime.datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
+        calander.date = dt_obj
+        calander.ph = False
+        calander.weekend = False
+        #calander.save()
+
+
+        #leaverecords["date"] = item.last_login.day
+        #tempL.append(leaverecords)
+    desc = "Request Whitelist For  /A  new mouse?"
+    #" ".join(desc.split())
+    desc = desc.replace('  ', ' ')
+    desc = desc.replace('.', '')
+    desc = desc.replace('?', '')
+    desc = desc.replace('/', '')
+    new_string = re.sub('[^a-zA-Z0-9\n]', ' ', desc)
+    new_string.strip()
+    my_tokens = new_string.split(" ")
+    count = len(my_tokens)
+
+    leaverecords = {}
+    counter = 0
+    for item in TextDic.objects.all():
+        leaverecords[counter] = item.text
+        counter += 1
+        if item.text.upper() in desc.upper():
+            textT = "text is in desc"
+            break
+        else:
+            textT = "text not in desc"
+
+    #if leaverecords[counter].upper() in my_tokens[counter].upper():
+    #    textT = "True"
+    #else:
+    #    textT = "False"
+
+
+
+    #for i in range(0,100):
+    #    if str(my_tokens[i]) == "A":
+    #        textT = "True"
+    #        break
+    #    else:
+    #        counter += 1
+
+
     context = {
         main_key.TEMPLATE_TITLE: title,
-
+        'date': T,
+        'text': random.randint(0,100),
+        'textM' : textT,
+        'textT' : leaverecords[0]
     }
     return render(request, 'test.html', context)
 
@@ -277,11 +353,26 @@ def ticket_directory(request):
 
     log = SystemLog.objects.all()
     userR = CustomUser.objects.all()
+    ticketOpen = 0
+    ticketClose = 0
+    ticketPending = 0
+    for item in userR:
+        for item2 in item.ticket:
+            if item2.user == user:
+                ticketPending += 1
+            if item2.status == "Open":
+                ticketOpen += 1
+            if item2.status == "Close":
+                ticketClose += 1
+
     title = 'Ticket Directory'
     context = {
         main_key.TEMPLATE_TITLE: title,
         'user': user,
         'userR': userR,
+        'ticketPending': ticketPending,
+        'ticketClose': ticketClose,
+        'ticketOpen': ticketOpen,
         'log':log
     }
     return render(request, 'ticket_directory.html', context)
@@ -295,6 +386,7 @@ def ticket_details(request,key):
         user = CustomUser.objects.get(username=session['login_user'])
 
     userR = CustomUser.objects.all()
+
     form = Create_Ticket_Form
     post = request.POST
     post._mutable = True
@@ -303,6 +395,7 @@ def ticket_details(request,key):
         form = Create_Ticket_Form(post)
         ticket = RequestDetails()
         log = LogDetails()
+        user2 = CustomUser.objects.get(username= form.data['agent'])
         ticket.last_change_date = datetime.datetime.now()
         ticket.request_type = form.data['request_type']
         ticket.impact = form.data['impact']
@@ -312,9 +405,10 @@ def ticket_details(request,key):
         for item in userR:
             for item2 in item.ticket:
                 if item2.ticket_number == key:
-                    item2.log.agent_id = user.username
-                    item2.log_created_date = datetime.datetime.now()
-                    item2.log.public_log = form.data['public_log']
+                    log.agent_id = user.username
+                    log.log_created_date = datetime.datetime.now()
+                    log.public_log = form.data['public_log']
+                    item2.agent = user2.to_dbref()
                     item2.last_change_date = ticket.last_change_date
                     item2.request_type = ticket.request_type
                     item2.impact = ticket.impact
@@ -330,6 +424,7 @@ def ticket_details(request,key):
     for item in userR:
         for item2 in item.ticket:
             if item2.ticket_number == key:
+                form.fields['agent'].initial = item2.agent.username
                 form.fields['request_type'].initial = item2.request_type
                 form.fields['impact'].initial = item2.impact
                 form.fields['urgency'].initial = item2.urgency
@@ -430,7 +525,7 @@ def user_create_ticket(request):
     else:
         user = CustomUser.objects.get(username=session['login_user'])
 
-    user2 = CustomUser.objects.get(username='Jerry')
+    user2 = CustomUser.objects.get(username='Admin')
 
     #admin = GetAdmin(session['login_user'])
     title = main_key.CREATE_TICKET_TITLE
@@ -455,10 +550,32 @@ def user_create_ticket(request):
         subject = form.data['subject']
         ticket.subject = subject
         description = form.data['description']
+        #desc = "Request For A  new? mouse?"
+        #" ".join(desc.split())
+        desc = form.data['description']
+        desc = desc.replace('  ', ' ')
+        new_string = re.sub('[^a-zA-Z0-9\n]', ' ', desc)
+        #new_string.strip()
+        my_tokens = new_string.split(" ")
+
+
         ticket.description = description
         ticket.request_type = form.data['request_type']
-        ticket.impact = 'Low'
+
         ticket.urgency = form.data['urgency']
+        if form.data['urgency'] == 'High':
+            ticket.impact = 'High'
+            ticket.targeted_resolved_date = datetime.datetime.now() + datetime.timedelta(days=1)
+        elif form.data['urgency'] == 'Medium':
+            ticket.impact = 'Medium'
+            ticket.targeted_resolved_date = datetime.datetime.now() + datetime.timedelta(days=2)
+        elif form.data['urgency'] == 'Normal':
+            ticket.impact = 'Normal'
+            ticket.targeted_resolved_date = datetime.datetime.now() + datetime.timedelta(days=3)
+        else :
+            ticket.impact = 'Low'
+            ticket.targeted_resolved_date = datetime.datetime.now() + datetime.timedelta(days=5)
+
         ticket.status = 'Open'
         ticket.mode = 'Web Form'
         ticket.team = 'MIS'
@@ -616,6 +733,71 @@ def user_profile(request, key):
     }
     return render(request, 'user_profile.html', context)
 
+def leave_application(request):
+    session = request.session
+    if CheckIsLoggedIn(session) == False:
+        return HttpResponseRedirect(main_key.TO_ERROR_PAGE) # Redirect after POST
+    else:
+        user = CustomUser.objects.get(username=session['login_user'])
+
+    title = main_key.LEAVE_APPLICATION_TITLE
+    form = LeaveForm
+    post = request.POST
+    post._mutable = True
+
+    if request.method == main_key.POST:
+        form = LeaveForm(post)
+        leave = LeaveRequest()
+        # date string to datetime object
+        #date_str = "03-17-2016 17:53:59"
+        #date_str2 = "2008-11-10 17:53:59"
+        #dt_obj = datetime.datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
+
+        startDate = form.data['startDate']
+        my_tokens = startDate.split("-")
+        startD = datetime.datetime(int(my_tokens[2]),int(my_tokens[0]),int(my_tokens[1]))
+        endDate = form.data['endDate']
+        my_tokens2 = endDate.split("-")
+        endD = datetime.datetime(int(my_tokens2[2]),int(my_tokens2[0]),int(my_tokens2[1]))
+        leave.typeLeave = form.data['typeLeave']
+        leave.startDate = startD
+        leave.endDate = endD
+        leave.reason = form.data['reason']
+        leave.status = 'Pending'
+        leave.leave_id = random_leaveid()
+        leave.user = user.to_dbref()
+        user.leave.append(leave)
+        user.save()
+        return HttpResponseRedirect(main_key.DASHBOARD_TITLE)
+
+
+    context = {
+        main_key.TEMPLATE_TITLE: title,
+        'user': user,
+        'forms': form
+    }
+    return render(request, 'leave_application.html', context)
+
+def leave_list(request):
+    session = request.session
+
+    post = request.POST
+    post._mutable = True
+    if CheckIsLoggedIn(session) == False:
+        return HttpResponseRedirect(main_key.
+                                    TO_ERROR_PAGE) # Redirect after POST
+    else:
+        user = CustomUser.objects.get(username=session['login_user'])
+
+    title = main_key.LEAVELIST_TITLE
+    leavelist = CustomUser.objects.all()
+
+    context = {
+        main_key.LEAVELIST_TITLE: title,
+        'user': user,
+        'leavelist': leavelist,
+    }
+    return render(request, 'leave_list.html', context)
 #--this
 @csrf_exempt
 def set_superuser_ajax(request):
@@ -631,6 +813,20 @@ def set_superuser_ajax(request):
 #--example
     #myName = post["myName"]
     data = CustomUser.objects.get(id=ObjectId(post["user"]))
+    userR = CustomUser.objects.all()
+
+    for item in userR:
+        for item2 in item.ticket:
+            if item2.ticket_number == "BsVtnbHbvr":
+                item2.status = "On Hold"
+                item.save()
+
+    for item in userR:
+        for item2 in item.leave:
+            if item2.leave_id == "nOrgkoAX4hAD":
+                item2.status = "Test"
+                item.save()
+
     if data.is_superuser == False:
         data.is_superuser = True
         data.is_staff = False
@@ -643,6 +839,86 @@ def set_superuser_ajax(request):
     #-- here u can add more
     return HttpResponse(jsonify({'is_superuser': data.is_superuser,
                                  'test': data.is_staff}))
+
+@csrf_exempt
+def set_leave_ajax(request):
+    post = request.POST
+    post._mutable = True  # allow change data in request.POST
+    session = request.session
+
+    if CheckIsLoggedIn(session) == False:
+        return HttpResponseRedirect(main_key.TO_ERROR_PAGE) # Redirect after POST
+    else:
+        user = CustomUser.objects.get(username=session['login_user'])
+
+    userR = CustomUser.objects.all()
+    userC = CustomUser.objects.get(id=post["userName"])
+
+    for item in userR:
+        for item2 in item.leave:
+            if item2.leave_id == post["user"]:
+                if post["rejected"] == "Reject":
+                    item2.status = "Reject"
+                    SendEmailleave(userC,user,item2.leave_id,item2.typeLeave,item2.reason)
+                    item.save()
+                else:
+                    item2.status = "Approve"
+                    SendEmailleave(userC,user,item2.leave_id,item2.typeLeave,item2.reason)
+                    item.save()
+
+    #-- here u can add more
+    return HttpResponse(jsonify({'success':True}))
+
+
+@csrf_exempt
+def get_leave_calender(request):
+    post = request.POST
+    post._mutable = True  # allow change data in request.POST
+    session = request.session
+    tempL = []
+    if CheckIsLoggedIn(session) == False:
+        return HttpResponseRedirect(main_key.TO_ERROR_PAGE) # Redirect after POST
+    else:
+        user = CustomUser.objects.get(username=session['login_user'])
+
+#--example
+    for item in CustomUser.objects.all():
+        leaverecords = {}
+        leaverecords["test"] = item.username
+        leaverecords["date"] = item.last_login.day
+        tempL.append(leaverecords)
+
+    return HttpResponse(jsonify(tempL))
+
+@csrf_exempt
+def get_calender(request):
+    post = request.POST
+    post._mutable = True  # allow change data in request.POST
+    session = request.session
+    temp = []
+    if CheckIsLoggedIn(session) == False:
+        return HttpResponseRedirect(main_key.TO_ERROR_PAGE) # Redirect after POST
+    else:
+        user = CustomUser.objects.get(username=session['login_user'])
+
+#--example
+    for item in CustomUser.objects.all():
+        #if item.username == session['login_user']:
+        #if item.username == "Robert":
+            for item2 in item.ticket:
+                if item2.status == "Open":
+                    records = {}
+                    records["ticketNo"] = item2.ticket_number
+                    records["subject"] = item2.subject
+                    records["requester"] = item.username
+                    records["date"] = item2.targeted_resolved_date.day
+                    records["month"] = item2.targeted_resolved_date.month
+                    records["hour"] = item2.targeted_resolved_date.hour
+                    records["minute"] = item2.targeted_resolved_date.minute
+                    temp.append(records)
+
+
+    return HttpResponse(jsonify(temp))
 
 #--this just reuse like the HttpResponse only
 def jsonify(object, fields=None, to_dict=False):

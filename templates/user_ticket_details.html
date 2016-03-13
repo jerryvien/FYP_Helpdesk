@@ -1,139 +1,22 @@
 {% extends 'user_template.html' %}
 {% load humanize %}
 {% block content %}
-{% comment %}<form class="form-horizontal" action="/create_ticket/" method="post">{% csrf_token %}
-<fieldset>
 
-<!-- Form Name -->
-    <legend>Requester Details (Admin)</legend>
-    <div class="row">
-        <label class="col-md-2 control-label" for="textinput">Requester Name</label>
-             {% for item in userR %}
-                 {% for item2 in item.ticket %}
-                     {% if item2.ticket_number == ticket_id%}
-                         <tr>
-                             <td>{{ item2.user.username}}</td>
-                             <td><a href="/ticket_details/{{ item2.ticket_number}}" value="">{{ item2.ticket_number}}</a></td>
-                             <td> <a href="/create_ticket_admin/" class="" value="{{ item2.subject }}">{{ item2.subject }}</a></td>
-                             <td>{{ item2.created_date_time }}</td>
-                             <td>{{ item2.request_type}}</td>
-                             <td>{{ item2.status }}</td>
-                             <td>{{ item2.urgency }}</td>
-                         </tr>
-
-
-
-    </div>
-    </br>
-     <div class="row">
-        <label class="col-md-2 control-label" for="textinput">E-Mail</label>
-          <div class="col-md-2">
-          </div>
-
-          <label class="col-md-2 control-label" for="textinput">Contact Number</label>
-          <div class="col-md-2">
-          </div>
-    </div>
-    </br>
-
-<legend>Request Details</legend>
-
-<!-- Text input-->
-
-    <div class="row">
-        <label class="col-md-2 control-label" for="textinput">Subject</label>
-          <div class="col-md-4">
-              <input class="form-control input-lg" id="inputlg" type="text" value="{{ item2.subject }}">
-          </div>
-    </div>
-    </br>
-    <div class="row">
-        <label class="col-md-2 control-label" for="textarea">Description</label>
-        <div class="panel-body">
-                        <textarea class="wysihtml5 form-control" rows="9"></textarea>
-        </div>
-          <div class="col-md-5">
-              {{ item2.description }}
-          </div>
-    </div>
-
-    </br>
-
-    <div class="row">
-
-      <label class="col-md-2 control-label" for="selectbasic">Request Type</label>
-      <div class="col-md-2">
-          {{ item2.request_type}}
-      </div>
-
-        <label class="col-md-1 control-label" for="selectbasic">Status</label>
-      <div class="col-md-2">
-          {{ item2.status }}
-      </div>
-    </div>
-    </br>
-    <div class="row">
-    <label class="col-md-2 control-label" for="selectbasic">Impact</label>
-      <div class="col-md-2">
-          {{ item2.impact }}
-      </div>
-
-        <label class="col-md-1 control-label" for="selectbasic">Urgency</label>
-      <div class="col-md-2">
-          {{ item2.urgency }}
-      </div>
-    </div>
-    </br>
-    <div class="row">
-        <label class="col-md-2 control-label" for="selectbasic">Mode</label>
-      <div class="col-md-2">
-          {{ item2.mode }}
-      </div>
-          <label class="col-md-1 control-label" for="selectbasic">Technical Team</label>
-      <div class="col-md-2">
-          {{ item2.team }}
-      </div>
-
-    </div>
-                     {% endif %}
-                 {% endfor %}
-             {% endfor%}
-
-
-
-
-
-<!-- Button (Double) -->
-<div class="form-group">
-  <label class="col-md-2 control-label" for="button1id"></label>
-  <div class="col-md-8">
-    <button id="button1id" name="button1id" class="btn btn-success" type="submit">Submit</button>
-    <button id="button2id" name="button2id" class="btn btn-danger" type="reset">Cancel</button>
-  </div>
-</div>
-
-</fieldset>
-</form>{% endcomment %}
 
     <div class="container-fluid">
 	<div class="row">
         {% for item in userR %}
-                 {% for item2 in item.ticket %}
-                        {% if item2.ticket_number == ticket_id%}
-		<div class="col-md-8">
-			<h1>
-				{{ item2.subject }}
-			</h1>
-        <div id="node-content-region">
-
-  <div class="node-author">  <div class="user-picture">
-    <img typeof="foaf:Image" src="http://demo.symphonythemes.com/drupal7/helpdesk/sites/demo.symphonythemes.com.drupal7.helpdesk/files/styles/thumbnail/public/pictures/picture-6-1412841739.jpg?itok=uZ9STTC1" alt="martina's picture" title="martina's picture">  </div>
-</div>
-
-  <div id="node-content">
-      <span property="dc:title" content="Can't install the WP Biz theme" class="rdf-meta element-hidden"></span><span property="sioc:num_replies" content="7" datatype="xsd:integer" class="rdf-meta element-hidden"></span>
-
-  <div class="node-information">
+            {% for item2 in item.ticket %}
+                {% if item2.ticket_number == ticket_id%}
+		            <div class="col-md-8">
+			            <h1>
+				            {{ item2.subject }}
+			            </h1>
+                        <div id="node-content-region">
+                            <div id="node-content">
+                                <span property="dc:title" content="Can't install the WP Biz theme" class="rdf-meta element-hidden"></span>
+                                <span property="sioc:num_replies" content="7" datatype="xsd:integer" class="rdf-meta element-hidden"></span>
+                                <div class="node-information">
     <h1 class="ticket-title">Ticket: <span class="themecolor-text">#{{ item2.ticket_number }}</span> - {{ item2.subject }}</h1>
    <i class="fa fa-clock-o"></i> Send by <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/drupal7/helpdesk/users/martina" typeof="sioc:UserAccount" property="foaf:name" datatype="">{{ item2.user.username }}</span></span> {{ item2.created_date_time|naturaltime }}
   </div>
@@ -148,6 +31,30 @@
             Public Log:
         </h2>
 
+
+    <div class="row">
+    <div class="col-lg-8 col-sm-8 col-xs-12">
+    <h4 id="addComment">Leave a Comment:</h4>
+    <hr>
+        {% for item3 in item2.log %}
+            <ul class="media-list comments">
+              <li class="media">
+                <a class="pull-left" href="#">
+                <img class="media-object img-circle img-thumbnail" src="http://snipplicious.com/images/guest.png" width="64" alt="Generic placeholder image">
+                </a>
+                <div class="media-body">
+                  <h4 class="media-heading pull-left">{{ item3.agent_id }}</h4>
+                  <div class="comment-info pull-left">
+                    <div class="btn btn-default btn-xs"><i class="fa fa-clock-o"></i> Posted {{ item3.log_created_date|naturaltime }}</div>
+                  </div>
+                  <br class="clearfix">
+                  <p class="well">{{ item3.public_log }}</p>
+                </div>
+              </li>
+            </ul>
+        {% endfor %}
+  </div>
+</div>
     </div>
     </div>
   </div>

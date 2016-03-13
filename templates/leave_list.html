@@ -1,0 +1,59 @@
+{% extends "main_template.html" %}
+{% load static from staticfiles %}
+{% block content %}
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading ">
+                    <span class="tools pull-right">
+                        <a class="fa fa-repeat box-refresh" href="javascript:;"></a>
+                    </span>
+                </header>
+                <table class="table colvis-data-table data-table">
+                    <thead>
+                    <tr>
+                        <th>Leave ID</th>
+                        <th>Name</th>
+                        <th>Leave Type</th>
+                        <th>Start of Date</th>
+                        <th>End of Date</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for a in leavelist %}
+                        {% for b in a.leave %}
+                            <tr id="leave{{ b.leave_id }}">
+                                <td>{{ b.leave_id }}</td>
+                                <td>{{ b.user }}</td>
+                                <td>{{ b.typeLeave }}</td>
+                                <td>{{ b.startDate }}</td>
+                                <td>{{ b.endDate }}</td>
+                                <td>{{ b.reason }}</td>
+                                {% if b.status == "Approve"%}
+                                    {% comment %}<td><span class="label label-success label-mini">{{ b.status }}</span></td>{% endcomment %}
+                                    <td>
+                                    <span class="label label-success">Approved</span>
+                                    </td>
+                                {% elif b.status == "Reject"%}
+                                    {% comment %}<td><span class="label label-success label-mini">{{ b.status }}</span></td>{% endcomment %}
+                                    <td>
+                                    <span class="label label-danger">Rejected</span>
+                                    </td>
+                                {% else %}
+                                    {% comment %}<td><span class="label label-primary label-mini">{{ b.status }}</span></td>{% endcomment %}
+                                    <td>
+                                    <a href="#/{{ b.leave_id }}" name="setLeave" class="btn btn-success" data-reject-id="Approve" data-address-id="{{ b.leave_id }}" data-user-id="{{ a.id }}">Approve</a>
+                                    <a href="#/{{ b.leave_id }}" name="setLeave" class="btn btn-danger" data-reject-id="Reject" data-address-id="{{ b.leave_id }}" data-user-id="{{ a.id }}">Reject</a>
+                                    <a href="" name="testbtn" class="btn btn-danger">Test</a>
+                                    </td>
+                                {% endif %}
+
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+{% endblock %}

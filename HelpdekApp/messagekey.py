@@ -25,6 +25,9 @@ class MainMsg(Document):
     TO_LOGIN_PAGE = '/login/'
     TO_HOME_PAGE = '/dashboard/'
     TO_USER_HOME_PAGE = '/user_dashboard/'
+    LEAVE_APPLICATION_TITLE = 'Leave Apply'
+    LEAVELIST_TITLE = 'Leave List'
+    LEAVEEDIT_TITLE = 'Leave Edit'
     TO_ACTIVATE_PAGE = '/activate/'
     TO_ERROR_PAGE = '/error/'
     TO_REGISTER_PAGE = '/register/'
@@ -33,6 +36,7 @@ class MainMsg(Document):
     CURRENT_DATE_TIME = 'current_datetime'
     TITLE = 'title'
     EMAIL_PATH = "/Email.txt"
+    LEAVE_EMAIL_PATH = "/LeaveEmail.txt"
     REQUIRED = 'required'
     CLASS = 'class'
     PLACEHOLDER = 'placeholder'
@@ -41,6 +45,6 @@ class MainMsg(Document):
     CURSORTOEND = 'this.value = this.value'
     STYLE = 'style'
     FORM_CONTROL_CLASS = 'form-control'
-    FORM_CONTROL_CLASS_BUTTON ='radio-custom radio-success'
+    FORM_CONTROL_CLASS_BUTTON ='form-control form-control-inline input-medium default-date-picker'
     BORDER_RED = 'border-color:red;'
     UNKNOWN_ERROR = 'Unknown error'

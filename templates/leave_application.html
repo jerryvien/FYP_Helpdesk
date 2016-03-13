@@ -1,0 +1,76 @@
+{% extends "user_template.html" %}
+
+{% block content %}
+    <form class="form-horizontal" action="/leave_application/" method="post" xmlns="http://www.w3.org/1999/html">{% csrf_token %}
+
+<script>
+$(document).ready(function() {
+    $('.datepicker').datepicker({
+
+    });
+});
+</script>
+<!-- Form Name -->
+
+<div></div></br>
+
+<!-- Text input-->
+<div class="form-group">
+
+    <div class="row">
+        <label class="col-md-2 control-label" for="selectbasic">Type of Leave</label>
+        <div class="col-md-2">
+            {{ forms.typeLeave }}
+        </div>
+    </div>
+    </br>
+
+    <div class="row">
+        <label class="col-md-2 control-label" for="Category">Start Date</label>
+        <div class="col-md-2">
+        <div class="form-group">
+            <div class="col-md-9 col-xs-11">
+                {{ forms.startDate }}
+            <span class="help-block">Select date</span>
+            </div>
+        </div>
+        </div>
+    </div>
+    </br>
+
+    <div class="row">
+        <label class="col-md-2 control-label" for="Category">End Date</label>
+        <div class="col-md-2">
+            <div class="form-group">
+            <div class="col-md-9 col-xs-11">
+                {{ forms.endDate }}
+            <span class="help-block">Select date</span>
+            </div>
+        </div>
+        </div>
+    </div>
+    </br>
+
+    <div class="row">
+        <label class="col-md-2 control-label" for="Category">Reason</label>
+      <div class="col-md-5">
+      {{ forms.reason }}
+      </div>
+    </div>
+    </br>
+
+</div>
+
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="button1id"></label>
+  <div class="col-md-0">
+    <button id="button1id" name="button1id" class="btn btn-success">Apply</button>
+    <button id="button2id" name="button2id" class="btn btn-danger">Cancel</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+{% endblock %}

@@ -98,7 +98,7 @@
                     {% endif %}
                     <td class="hidden-xs">
                         {% if item.is_superuser == False%}
-                            <a class="btn btn-success btn-xs fa fa-check" data-toggle="modal" name="setBtn" href="/profile_edit/{{ item.id }}" data-user-id="{{ item.id }}">Assign</a>
+                            <a class="btn btn-success btn-xs fa fa-check" data-toggle="modal" name="setBtn" href="/profile_edit/{{ item.id }}"  data-user-id="{{ item.id }}">Assign</a>
                         {% else %}
                             <a class="btn btn-danger btn-xs fa fa-remove" data-toggle="modal" name="setBtn" href="/profile_edit/{{ item.id }}" data-user-id="{{ item.id }}">Unassign</a>
                         {% endif %}
